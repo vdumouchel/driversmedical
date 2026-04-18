@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { SITE_DESCRIPTION } from "@/lib/constants";
+import { brand } from "@/config/brand";
+import { themeStyleSheet } from "@/config/theme";
 import "./globals.css";
 
 const inter = Inter({
@@ -9,8 +10,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "DriversMedical.clinic — Get Your Driver's Medical Form Online",
-  description: SITE_DESCRIPTION,
+  title: brand.metadata.title.en,
+  description: brand.metadata.description.en,
 };
 
 export default function RootLayout({
@@ -20,6 +21,12 @@ export default function RootLayout({
 }>) {
   return (
     <html className={`${inter.variable} h-full antialiased`}>
+      <head>
+        <style
+          id="theme-tokens"
+          dangerouslySetInnerHTML={{ __html: themeStyleSheet() }}
+        />
+      </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );

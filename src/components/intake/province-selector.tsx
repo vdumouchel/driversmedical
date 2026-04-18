@@ -1,24 +1,30 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { PROVINCES } from "@/lib/constants";
+import { provinceList } from "@/config/provinces";
 import { useIntakeStore } from "@/stores/intake-store";
 import { motion } from "framer-motion";
-import { useLocalePath } from "@/lib/i18n-utils";
-import { useLingui } from "@lingui/react/macro";
+import { useLocalePath, useLang } from "@/lib/i18n-utils";
+import { intake } from "@/content/intake";
+import { pickLocale } from "@/content";
 
 export function ProvinceSelector() {
   const router = useRouter();
   const setProvince = useIntakeStore((s) => s.setProvince);
   const lp = useLocalePath();
-  const { t } = useLingui();
+  const lang = useLang();
+  const c = pickLocale(intake, lang).provinceSelect;
 
-  const available = PROVINCES.filter((p) => p.available);
-  const unavailable = PROVINCES.filter((p) => !p.available);
+  const available = provinceList.filter((p) => p.available);
+  const unavailable = provinceList.filter((p) => !p.available);
 
   function handleSelect(slug: string) {
     setProvince(slug);
     router.push(lp(`/intake/${slug}`));
+  }
+
+  function labelFor(p: (typeof provinceList)[number]) {
+    return lang === "fr" ? p.nameFr : p.nameEn;
   }
 
   return (
@@ -30,11 +36,9 @@ export function ProvinceSelector() {
         className="w-full max-w-lg text-center"
       >
         <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
-          {t`Which province is your driver's medical form for?`}
+          {c.heading}
         </h1>
-        <p className="text-muted-foreground mb-10">
-          {t`We'll load the right form and questions for your province.`}
-        </p>
+        <p className="text-muted-foreground mb-10">{c.subheading}</p>
 
         <div className="space-y-3">
           {available.map((p) => (
@@ -46,11 +50,11 @@ export function ProvinceSelector() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="font-semibold text-foreground group-hover:text-primary transition-colors">
-                    {p.name}
+                    {labelFor(p)}
                   </p>
                   {p.formCode && (
                     <p className="text-sm text-muted-foreground mt-0.5">
-                      Form {p.formCode}
+                      {c.formPrefix} {p.formCode}
                     </p>
                   )}
                 </div>
@@ -75,7 +79,7 @@ export function ProvinceSelector() {
         {unavailable.length > 0 && (
           <div className="mt-8">
             <p className="text-xs text-muted-foreground mb-3 uppercase tracking-wide font-medium">
-              {t`Coming Soon`}
+              {c.comingSoon}
             </p>
             <div className="grid grid-cols-2 gap-2">
               {unavailable.map((p) => (
@@ -83,7 +87,7 @@ export function ProvinceSelector() {
                   key={p.slug}
                   className="rounded-lg border border-border/50 bg-muted/20 px-4 py-2.5 text-sm text-muted-foreground"
                 >
-                  {p.name}
+                  {labelFor(p)}
                 </div>
               ))}
             </div>

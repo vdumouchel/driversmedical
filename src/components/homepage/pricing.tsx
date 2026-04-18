@@ -5,13 +5,17 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 import { buttonVariants } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
-import { useLingui } from "@lingui/react/macro";
-import { PROVINCES, type ProvinceSlug } from "@/lib/constants";
-import { isGeoProvince, PRICING_CAD_BY_PROVINCE } from "../../lib/pricing";
 import {
+  provinceList,
+  getProvince,
+  isActiveProvince,
+  parseProvinceSearchParam,
   HOME_PROVINCE_QUERY_KEY,
-  parseGeoProvinceSearchParam,
-} from "@/lib/province-from-geo";
+  type ActiveProvinceSlug,
+  type ProvinceContent,
+} from "@/config/provinces";
+import { pricing } from "@/content/pricing";
+import { pickLocale } from "@/content";
 import {
   Select,
   SelectContent,
@@ -27,61 +31,34 @@ export function Pricing({
   initialProvince,
   initialGeoHint,
 }: {
-  initialProvince: ProvinceSlug | null;
+  initialProvince: ActiveProvinceSlug | null;
   initialGeoHint: boolean;
 }) {
-  const { t } = useLingui();
   const lang = useLang();
+  const c = pickLocale(pricing, lang);
   const lp = useLocalePath();
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const urlProvince = useMemo(
-    () =>
-      parseGeoProvinceSearchParam(
-        searchParams.get(HOME_PROVINCE_QUERY_KEY),
-      ),
+    () => parseProvinceSearchParam(searchParams.get(HOME_PROVINCE_QUERY_KEY)),
     [searchParams],
   );
-  const province: ProvinceSlug | null = urlProvince ?? initialProvince;
+  const province: ActiveProvinceSlug | null = urlProvince ?? initialProvince;
   const geoHint = urlProvince == null && initialGeoHint;
 
-  const price =
-    province && isGeoProvince(province)
-      ? PRICING_CAD_BY_PROVINCE[province]
-      : undefined;
-
-  const features = useMemo(() => {
-    if (!province || !isGeoProvince(province)) return [];
-    if (province === "new-brunswick") {
-      return [
-        t`Complete your DL-1 driver medical questionnaire online`,
-        t`Review by a licensed physician or nurse in New Brunswick`,
-        t`Official signed DL-1 form delivered digitally`,
-        t`Secure PDF emailed to you, ready to submit`,
-        t`Same-day processing when you qualify`,
-        t`PIPEDA-compliant, encrypted intake`,
-        t`Support available 7 days a week`,
-      ];
-    }
-    return [
-      t`Complete your M-28 commercial driver medical questionnaire online`,
-      t`Review by a licensed physician or nurse in Quebec`,
-      t`In-person visit required for the vision (eye) examination`,
-      t`Our clinic will call you within 72 hours to schedule your in-person appointment, depending on your availability`,
-      t`Official signed M-28 form aligned with SAAQ requirements`,
-      t`Secure PDF emailed to you, ready to submit`,
-      t`Same-day processing when you qualify`,
-      t`PIPEDA-compliant, encrypted intake`,
-      t`Support available 7 days a week`,
-    ];
-  }, [province, t]);
+  const provinceData = getProvince(province);
+  const price = provinceData?.priceCad;
+  const features =
+    provinceData?.pricingFeatures != null
+      ? pickLocale(provinceData.pricingFeatures, lang)
+      : [];
 
   const intakeHref = province ? lp(`/intake/${province}`) : lp("/intake");
 
-  const firstUnavailableIndex = PROVINCES.findIndex((p) => !p.available);
+  const firstUnavailableIndex = provinceList.findIndex((p) => !p.available);
 
-  function labelFor(p: (typeof PROVINCES)[number]) {
+  function labelFor(p: ProvinceContent) {
     return lang === "fr" ? p.nameFr : p.nameEn;
   }
 
@@ -92,19 +69,16 @@ export function Pricing({
         <div className="relative p-8 sm:p-12">
           <div className="flex flex-col items-center text-center">
             <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5">
-              <span className="text-xs font-medium text-primary">
-                {t`All-Inclusive Price`}
-              </span>
+              <span className="text-xs font-medium text-primary">{c.badge}</span>
             </div>
 
             <div className="mt-6 w-full max-w-xs">
               <Select
                 value={province}
                 onValueChange={(v) => {
-                  const slug = (v ?? null) as ProvinceSlug | null;
-                  if (slug && isGeoProvince(slug)) {
+                  if (v && isActiveProvince(v)) {
                     const next = new URLSearchParams(searchParams.toString());
-                    next.set(HOME_PROVINCE_QUERY_KEY, slug);
+                    next.set(HOME_PROVINCE_QUERY_KEY, v);
                     router.replace(`${pathname}?${next.toString()}`, {
                       scroll: false,
                     });
@@ -114,12 +88,12 @@ export function Pricing({
                 <SelectTrigger
                   size="default"
                   className="h-10 w-full min-w-0 max-w-none justify-between border-input bg-background px-3 data-[size=default]:h-10"
-                  aria-label={t`Select your province`}
+                  aria-label={c.selectLabel}
                 >
-                  <SelectValue placeholder={t`Select your province`}>
+                  <SelectValue placeholder={c.selectLabel}>
                     {(slug: string | null) => {
-                      if (!slug) return t`Select your province`;
-                      const p = PROVINCES.find((x) => x.slug === slug);
+                      if (!slug) return c.selectLabel;
+                      const p = provinceList.find((x) => x.slug === slug);
                       if (!p) return slug;
                       return (
                         <span className="flex min-w-0 items-center gap-2">
@@ -134,7 +108,7 @@ export function Pricing({
                   </SelectValue>
                 </SelectTrigger>
                 <SelectContent className="min-w-[var(--anchor-width)]">
-                  {PROVINCES.flatMap((p, i) => {
+                  {provinceList.flatMap((p, i) => {
                     const sep =
                       i === firstUnavailableIndex && i > 0 ? (
                         <SelectSeparator key={`sep-before-${p.slug}`} />
@@ -167,7 +141,7 @@ export function Pricing({
                               <span className="truncate">{labelFor(p)}</span>
                             </span>
                             <span className="shrink-0 text-xs font-normal text-muted-foreground">
-                              {t`Soon available`}
+                              {c.soonAvailableBadge}
                             </span>
                           </span>
                         )}
@@ -179,9 +153,9 @@ export function Pricing({
               </Select>
             </div>
 
-            {geoHint && province && isGeoProvince(province) ? (
+            {geoHint && province ? (
               <p className="mt-3 max-w-md text-xs text-muted-foreground">
-                {t`We matched your location to show the right price. Change the province above if needed.`}
+                {c.geoHint}
               </p>
             ) : null}
 
@@ -196,9 +170,7 @@ export function Pricing({
               ) : null}
             </div>
 
-            <p className="mt-4 text-lg text-muted-foreground">
-              {t`One simple price. No hidden fees or surprises.`}
-            </p>
+            <p className="mt-4 text-lg text-muted-foreground">{c.tagline}</p>
 
             {features.length > 0 ? (
               <div className="mt-8 grid w-full gap-3 sm:grid-cols-2">
@@ -229,13 +201,11 @@ export function Pricing({
                   className: "text-base sm:px-12",
                 })}
               >
-                {t`Get Started`}
+                {c.cta}
               </Link>
             </div>
 
-            <p className="mt-6 text-xs text-muted-foreground">
-              {t`Secure payment processed after intake completion. Full refund if one of our providers cannot complete your form.`}
-            </p>
+            <p className="mt-6 text-xs text-muted-foreground">{c.disclaimer}</p>
           </div>
         </div>
       </div>
