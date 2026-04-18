@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { getProvinceSchema, isValidProvince } from "@/schemas/registry";
+import { getProvinceSchema, isValidProvince } from "@/config/provinces";
 import { useIntakeStore } from "@/stores/intake-store";
 import { QuestionFlow } from "@/components/intake/question-flow";
 

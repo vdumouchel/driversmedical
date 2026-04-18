@@ -1,8 +1,6 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useLingui } from "@lingui/react/macro";
-import { PROVINCES } from "@/lib/constants";
 import { buttonVariants } from "@/components/ui/button";
 import {
   Select,
@@ -13,57 +11,63 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useLang } from "@/lib/i18n-utils";
-import { isGeoProvince } from "@/lib/pricing";
-import type { GeoProvinceSlug } from "@/lib/province-from-geo";
-import { HOME_PROVINCE_QUERY_KEY } from "@/lib/province-from-geo";
+import {
+  provinceList,
+  isActiveProvince,
+  HOME_PROVINCE_QUERY_KEY,
+  type ActiveProvinceSlug,
+  type ProvinceContent,
+} from "@/config/provinces";
+import { intake } from "@/content/intake";
+import { pickLocale } from "@/content";
 import { cn } from "@/lib/utils";
 
 export function HomeProvinceSelect({
   province,
 }: {
-  province: GeoProvinceSlug | null;
+  province: ActiveProvinceSlug | null;
 }) {
-  const { t } = useLingui();
   const lang = useLang();
+  const c = pickLocale(intake, lang).homeProvinceSelect;
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  function labelFor(p: (typeof PROVINCES)[number]) {
+  function labelFor(p: ProvinceContent) {
     return lang === "fr" ? p.nameFr : p.nameEn;
   }
 
-  function applyProvince(slug: GeoProvinceSlug) {
+  function applyProvince(slug: ActiveProvinceSlug) {
     const next = new URLSearchParams(searchParams.toString());
     next.set(HOME_PROVINCE_QUERY_KEY, slug);
     router.replace(`${pathname}?${next.toString()}`, { scroll: false });
   }
 
-  const firstUnavailableIndex = PROVINCES.findIndex((p) => !p.available);
+  const firstUnavailableIndex = provinceList.findIndex((p) => !p.available);
 
   return (
-    <div className="flex w-full max-w-full flex-col gap-1.5 sm:w-auto sm:min-w-[22rem] md:min-w-[26rem]">
+    <div className="flex w-full max-w-full flex-col gap-1.5 sm:w-fit sm:max-w-[15rem]">
       <span className="text-xs font-medium text-muted-foreground sm:sr-only">
-        {t`Province`}
+        {c.provinceLabel}
       </span>
       <Select
-        value={province ?? undefined}
+        value={province ?? ""}
         onValueChange={(v) => {
-          if (isGeoProvince(v)) applyProvince(v);
+          if (isActiveProvince(v)) applyProvince(v);
         }}
       >
         <SelectTrigger
           size="default"
-          aria-label={t`Choose province for personalized content`}
+          aria-label={c.ariaLabel}
           className={cn(
             buttonVariants({ variant: "outline", size: "lg" }),
-            "h-9 w-full min-w-0 max-w-none justify-between border-border px-3 font-normal sm:min-w-[22rem] md:min-w-[26rem]",
+            "h-9 w-full min-w-0 max-w-full justify-between border-border px-3 font-normal sm:max-w-[15rem]",
           )}
         >
-          <SelectValue placeholder={t`Select your province`}>
+          <SelectValue placeholder={c.placeholder}>
             {(slug: string | null) => {
-              if (!slug) return t`Select your province`;
-              const p = PROVINCES.find((x) => x.slug === slug);
+              if (!slug) return c.placeholder;
+              const p = provinceList.find((x) => x.slug === slug);
               if (!p) return slug;
               return (
                 <span className="flex min-w-0 flex-1 items-center gap-2">
@@ -79,8 +83,14 @@ export function HomeProvinceSelect({
             }}
           </SelectValue>
         </SelectTrigger>
-        <SelectContent className="max-w-[min(100vw-1.5rem,32rem)] min-w-[max(var(--anchor-width),22rem)] sm:min-w-[26rem]">
-          {PROVINCES.flatMap((p, i) => {
+        <SelectContent
+          className={cn(
+            "max-w-[min(100vw-1.5rem,32rem)] min-w-[22rem] sm:min-w-[26rem]",
+            // Wider than the compact trigger; default SelectContent uses anchor width only
+            "w-[max(22rem,var(--anchor-width))] sm:w-[max(26rem,var(--anchor-width))]",
+          )}
+        >
+          {provinceList.flatMap((p, i) => {
             const sep =
               i === firstUnavailableIndex && i > 0 ? (
                 <SelectSeparator key={`sep-before-${p.slug}`} />
@@ -111,7 +121,7 @@ export function HomeProvinceSelect({
                       <span className="truncate">{labelFor(p)}</span>
                     </span>
                     <span className="shrink-0 text-xs font-normal text-muted-foreground">
-                      {t`Soon available`}
+                      {c.soonAvailable}
                     </span>
                   </span>
                 )}

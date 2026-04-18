@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
-import { Menu, TruckElectric, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import { SITE_NAME } from "@/lib/constants";
+import { brand } from "@/config/brand";
+import { site } from "@/content/site";
+import { pickLocale } from "@/content";
 import { useLang, useLocalePath } from "@/lib/i18n-utils";
 import { usePathname } from "next/navigation";
-import { useLingui } from "@lingui/react/macro";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -16,17 +17,18 @@ export function Header() {
   const pathname = usePathname();
   const otherLang = lang === "en" ? "fr" : "en";
   const switchPath = pathname.replace(`/${lang}`, `/${otherLang}`);
-  const { t } = useLingui();
+  const s = pickLocale(site, lang);
+  const LogoIcon = brand.logoIcon;
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href={lp("/")} className="flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-            <TruckElectric className="h-5 w-5 text-primary-foreground" />
+            <LogoIcon className="h-5 w-5 text-primary-foreground" />
           </div>
           <span className="text-xl font-semibold text-foreground">
-            {SITE_NAME}
+            {brand.siteName}
           </span>
         </Link>
 
@@ -35,25 +37,25 @@ export function Header() {
             href="#how-it-works"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
-            {t`How It Works`}
+            {s.nav.howItWorks}
           </Link>
           <Link
             href="#benefits"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
-            {t`Benefits`}
+            {s.nav.benefits}
           </Link>
           <Link
             href="#testimonials"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
-            {t`Testimonials`}
+            {s.nav.testimonials}
           </Link>
           <Link
             href="#faq"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
-            {t`FAQ`}
+            {s.nav.faq}
           </Link>
         </nav>
 
@@ -65,7 +67,7 @@ export function Header() {
             {otherLang.toUpperCase()}
           </Link>
           <Link href={lp("/intake")} className={buttonVariants()}>
-            {t`Get Started`}
+            {s.nav.getStarted}
           </Link>
         </div>
 
@@ -90,28 +92,28 @@ export function Header() {
               className="text-sm font-medium text-muted-foreground"
               onClick={() => setMobileMenuOpen(false)}
             >
-              {t`How It Works`}
+              {s.nav.howItWorks}
             </Link>
             <Link
               href="#benefits"
               className="text-sm font-medium text-muted-foreground"
               onClick={() => setMobileMenuOpen(false)}
             >
-              {t`Benefits`}
+              {s.nav.benefits}
             </Link>
             <Link
               href="#testimonials"
               className="text-sm font-medium text-muted-foreground"
               onClick={() => setMobileMenuOpen(false)}
             >
-              {t`Testimonials`}
+              {s.nav.testimonials}
             </Link>
             <Link
               href="#faq"
               className="text-sm font-medium text-muted-foreground"
               onClick={() => setMobileMenuOpen(false)}
             >
-              {t`FAQ`}
+              {s.nav.faq}
             </Link>
             <div className="flex items-center justify-between pt-4 border-t border-border">
               <Link
@@ -122,7 +124,7 @@ export function Header() {
                 {otherLang.toUpperCase()}
               </Link>
               <Link href={lp("/intake")} className={buttonVariants({ size: "sm" })}>
-                {t`Get Started`}
+                {s.nav.getStarted}
               </Link>
             </div>
           </nav>

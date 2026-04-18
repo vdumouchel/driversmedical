@@ -1,10 +1,11 @@
-import type { ProvinceSlug } from "@/lib/constants";
+import {
+  isActiveProvince,
+  provinceList,
+  type ActiveProvinceSlug,
+} from "@/config/provinces";
 
-/** NB / QC: provinces we resolve from geo (and use for marketing, hero, pricing, etc.). */
-export type GeoProvinceSlug = Extract<
-  ProvinceSlug,
-  "new-brunswick" | "quebec"
->;
+/** Alias preserved for existing imports. Equivalent to ActiveProvinceSlug. */
+export type GeoProvinceSlug = ActiveProvinceSlug;
 
 export type GeoProvinceResult = {
   province: GeoProvinceSlug | null;
@@ -12,19 +13,7 @@ export type GeoProvinceResult = {
   source: "vercel" | "ip" | "none" | "dev";
 };
 
-/** Query key on the homepage for user-selected NB/QC (overrides IP/geo for marketing copy). */
-export const HOME_PROVINCE_QUERY_KEY = "province";
-
-/** Parse `?province=` from the URL into a supported geo slug, or null if missing/invalid. */
-export function parseGeoProvinceSearchParam(
-  raw: string | string[] | null | undefined,
-): GeoProvinceSlug | null {
-  const s = Array.isArray(raw) ? raw[0] : raw;
-  if (!s || typeof s !== "string") return null;
-  const n = s.trim().toLowerCase();
-  if (n === "new-brunswick" || n === "quebec") return n;
-  return null;
-}
+export { HOME_PROVINCE_QUERY_KEY, parseProvinceSearchParam as parseGeoProvinceSearchParam } from "@/config/provinces";
 
 function geoDebugEnabled(): boolean {
   return (
@@ -49,7 +38,10 @@ function stripDiacritics(s: string): string {
   return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-/** Map Canadian subdivision (ISO-style or name) to a geo-supported province slug, or null. */
+/**
+ * Map Canadian subdivision (ISO-style or name) to an active province slug.
+ * Only returns a slug for provinces that are actively served by this thematic.
+ */
 export function mapCanadaToGeoProvince(
   countryCode: string | null | undefined,
   regionCode: string | null | undefined,
@@ -58,13 +50,23 @@ export function mapCanadaToGeoProvince(
   if (!countryCode || countryCode.trim().toUpperCase() !== "CA") return null;
 
   const code = normalizeRegionCode(regionCode);
-  if (code === "NB") return "new-brunswick";
-  if (code === "QC") return "quebec";
+  if (code) {
+    const match = provinceList.find(
+      (p) => p.code === code && isActiveProvince(p.slug),
+    );
+    if (match) return match.slug as GeoProvinceSlug;
+  }
 
-  const name = stripDiacritics((regionName ?? "").toLowerCase());
-  if (name.includes("new brunswick") || name.includes("nouveau-brunswick"))
-    return "new-brunswick";
-  if (name === "quebec" || name.includes("quebec")) return "quebec";
+  const name = stripDiacritics((regionName ?? "").toLowerCase()).trim();
+  if (name) {
+    const match = provinceList.find((p) => {
+      if (!isActiveProvince(p.slug)) return false;
+      const en = stripDiacritics(p.nameEn.toLowerCase());
+      const fr = stripDiacritics(p.nameFr.toLowerCase());
+      return name === en || name === fr || name.includes(en) || name.includes(fr);
+    });
+    if (match) return match.slug as GeoProvinceSlug;
+  }
 
   return null;
 }
@@ -112,25 +114,36 @@ type IpWhoPayload = {
   region_code?: string;
 };
 
+function parseDevGeoOverride(raw: string | undefined): GeoProvinceSlug | null {
+  if (!raw) return null;
+  const n = raw.trim().toLowerCase();
+  if (!n) return null;
+  if (isActiveProvince(n)) return n;
+  // accept province code (nb, qc, ...) or display name
+  const byCode = provinceList.find(
+    (p) => p.code.toLowerCase() === n && isActiveProvince(p.slug),
+  );
+  if (byCode) return byCode.slug as GeoProvinceSlug;
+  const byName = provinceList.find((p) => {
+    if (!isActiveProvince(p.slug)) return false;
+    const en = stripDiacritics(p.nameEn.toLowerCase());
+    const fr = stripDiacritics(p.nameFr.toLowerCase());
+    return stripDiacritics(n) === en || stripDiacritics(n) === fr;
+  });
+  if (byName) return byName.slug as GeoProvinceSlug;
+  return null;
+}
+
 export async function resolveGeoProvinceFromHeaders(
   h: Headers,
 ): Promise<GeoProvinceResult> {
   if (process.env.NODE_ENV === "development") {
-    const raw =
-      process.env.DEV_GEO_PROVINCE?.trim().toLowerCase() ??
-      process.env.DEV_GEO_PRICED_PROVINCE?.trim().toLowerCase();
-    if (raw === "quebec" || raw === "qc") {
-      geoLog("DEV_GEO_PROVINCE env → quebec");
-      return { province: "quebec", source: "dev" };
-    }
-    if (
-      raw === "new-brunswick" ||
-      raw === "nb" ||
-      raw === "new brunswick" ||
-      raw === "nouveau-brunswick"
-    ) {
-      geoLog("DEV_GEO_PROVINCE env → new-brunswick");
-      return { province: "new-brunswick", source: "dev" };
+    const override =
+      parseDevGeoOverride(process.env.DEV_GEO_PROVINCE) ??
+      parseDevGeoOverride(process.env.DEV_GEO_PRICED_PROVINCE);
+    if (override) {
+      geoLog("DEV_GEO_PROVINCE env →", override);
+      return { province: override, source: "dev" };
     }
   }
 
@@ -148,7 +161,7 @@ export async function resolveGeoProvinceFromHeaders(
   }
   if (country || region) {
     geoLog(
-      "Vercel subdivision present but not NB/QC; falling back to IP lookup",
+      "Vercel subdivision present but not an active province; falling back to IP lookup",
     );
   }
 
@@ -203,7 +216,7 @@ export async function resolveGeoProvinceFromHeaders(
       return { province, source: "ip" };
     }
     geoLog(
-      "ipwho.is location is not NB/QC (or not CA); no geo province to return",
+      "ipwho.is location is not an active province (or not CA); no geo province to return",
     );
   } catch (e) {
     geoLog("ipwho.is error", e instanceof Error ? e.message : e);
