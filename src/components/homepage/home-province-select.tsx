@@ -51,7 +51,7 @@ export function HomeProvinceSelect({
         {c.provinceLabel}
       </span>
       <Select
-        value={province ?? undefined}
+        value={province ?? ""}
         onValueChange={(v) => {
           if (isActiveProvince(v)) applyProvince(v);
         }}
