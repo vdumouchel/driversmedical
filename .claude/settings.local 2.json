@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm create:*)",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm dlx:*)",
+      "Bash(pnpm dev:*)",
+      "Bash(curl -s http://localhost:3000)",
+      "mcp__Claude_Preview__preview_start"
+    ]
+  }
+}

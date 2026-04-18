@@ -1,0 +1,484 @@
+msgid ""
+msgstr ""
+"Language: fr\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Content-Type: \n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#: src/components/homepage/how-it-works.tsx:18
+msgid "10-15 minutes"
+msgstr "10-15 minutes"
+
+#: src/components/homepage/how-it-works.tsx:23
+msgid "A licensed Canadian physician or nurse reviews your information and completes your official driver medical form."
+msgstr "Un médecin ou infirmière canadien certifié examine vos informations et complète votre formulaire médical officiel de conducteur."
+
+#: src/components/homepage/how-it-works.tsx:22
+msgid "A provider reviews your case"
+msgstr "Un professionel de la santé examine votre dossier"
+
+#: src/components/homepage/faq.tsx:43
+msgid "Absolutely. Our platform is fully PIPEDA-compliant, and all data is encrypted at rest and in transit. Your health information is stored securely and never shared without your explicit consent."
+msgstr "Absolument. Notre plateforme est entièrement conforme à la LPRPDE, et toutes les données sont chiffrées au repos et en transit. Vos informations de santé sont stockées de manière sécurisée et jamais partagées sans votre consentement explicite."
+
+#: src/components/homepage/testimonials.tsx:15
+msgid "After 20 years on the road, I know how hard it is to schedule appointments around my routes. Filled out the online form at a rest stop, and had my medical in my email before my next delivery. This is how it should be done."
+msgstr "Après 20 ans sur la route, je sais à quel point c'est difficile de planifier des rendez-vous autour de mes trajets. J'ai rempli le formulaire en ligne à une halte routière et j'avais mon médical dans mon courriel avant ma prochaine livraison. C'est comme ça que ça devrait se faire."
+
+#: src/components/layout/footer.tsx:120
+msgid "All rights reserved."
+msgstr "Tous droits réservés."
+
+#: src/components/homepage/pricing.tsx:104
+msgid "All-Inclusive Price"
+msgstr "Prix tout inclus"
+
+#: src/components/homepage/testimonials.tsx:23
+msgid "As an owner-operator, every day off the road costs me money. DriversMedical let me renew my medical without losing a load. The online form covered everything, and I had my form the next day."
+msgstr "En tant que propriétaire-exploitante, chaque jour hors de la route me coûte de l'argent. DriversMedical m'a permis de renouveler mon médical sans perdre un chargement. Le formulaire en ligne couvrait tout, et j'avais mon formulaire le lendemain."
+
+#: src/components/layout/footer.tsx:45
+#: src/components/layout/header.tsx:44
+#: src/components/layout/header.tsx:100
+msgid "Benefits"
+msgstr "Avantages"
+
+#: src/components/homepage/doctor-section.tsx:55
+msgid "Certified in Canada"
+msgstr "Certifiés au Canada"
+
+#: src/components/homepage/home-province-select.tsx:54
+msgid "Choose province for personalized content"
+msgstr "Choisissez la province pour un contenu personnalisé"
+
+#: src/components/homepage/how-it-works.tsx:11
+msgid "Choose your province so we load the correct driver medical form and questions for your jurisdiction."
+msgstr "Choisissez votre province pour que nous chargions le bon formulaire médical et les bonnes questions pour votre juridiction."
+
+#: src/components/intake/province-selector.tsx:78
+msgid "Coming Soon"
+msgstr "Bientôt disponible"
+
+#: src/components/homepage/hero.tsx:77
+msgid "Commercial driver completing an online driver medical form"
+msgstr "Conducteur commercial remplissant un formulaire médical de conducteur en ligne"
+
+#: src/components/homepage/pricing.tsx:66
+msgid "Complete your DL-1 driver medical questionnaire online"
+msgstr "Complétez votre questionnaire médical de conducteur DL-1 en ligne"
+
+#: src/components/homepage/benefits.tsx:29
+msgid "Complete your entire medical form from your phone, tablet, or computer. *In person visits required depending on your province.*"
+msgstr "Complétez votre formulaire médical complet depuis votre téléphone, tablette ou ordinateur. *Visites en personne requises selon votre province.*"
+
+#: src/components/homepage/pricing.tsx:76
+msgid "Complete your M-28 commercial driver medical questionnaire online"
+msgstr "Complétez votre questionnaire médical de conducteur commercial M-28 en ligne"
+
+#: src/components/homepage/how-it-works.tsx:16
+msgid "Complete your medical form online"
+msgstr "Complétez votre formulaire médical en ligne"
+
+#: src/components/layout/footer.tsx:98
+msgid "Contact"
+msgstr "Contact"
+
+#: src/components/homepage/hero.tsx:38
+msgid "Done Online."
+msgstr "En ligne."
+
+#: src/components/homepage/hero.tsx:36
+msgid "Driver's Medical."
+msgstr "Rapport  médical."
+
+#: src/components/homepage/faq.tsx:17
+msgid "DriversMedical.clinic is a telemedicine platform that allows commercial drivers to get their required driver medical forms completed online. You fill out a secure online intake, a licensed physician or nurse reviews your information, and your completed form is delivered digitally."
+msgstr "DriversMedical.clinic est une plateforme de télémédecine qui permet aux conducteurs commerciaux d'obtenir leurs formulaires médicaux requis en ligne. Vous remplissez un questionnaire en ligne sécurisé, un médecin ou infirmière agréé examine vos informations et votre formulaire complété est livré numériquement."
+
+#: src/components/homepage/benefits.tsx:43
+msgid "Email delivery"
+msgstr "Livraison par courriel"
+
+#: src/components/homepage/doctor-section.tsx:68
+msgid "Every driver medical examination is conducted by physicians licensed to practice in Canada and authorized to complete driver medical forms."
+msgstr "Chaque examen médical de conducteur est effectué par des médecins autorisés à exercer au Canada et habilités à remplir les formulaires médicaux de conducteur."
+
+#: src/components/homepage/benefits.tsx:34
+msgid "Every form is reviewed and signed by a physician or nurse licensed to practice in your province."
+msgstr "Chaque formulaire est révisé et signé par un médecin ou infirmière autorisé à exercer dans votre province."
+
+#: src/components/homepage/benefits.tsx:56
+msgid "Everything you need for your driver medical form"
+msgstr "Tout ce dont vous avez besoin pour votre formulaire médical de conducteur"
+
+#: src/components/homepage/faq.tsx:61
+msgid "Everything you need to know about our online driver medical exam service."
+msgstr "Tout ce que vous devez savoir sur notre service d'examen médical de conducteur en ligne."
+
+#: src/components/homepage/doctor-section.tsx:64
+msgid "Examinations by certified Canadian healthcare specialists"
+msgstr "Examens par des spécialistes canadiens certifiés en santé"
+
+#: src/components/homepage/doctor-section.tsx:81
+msgid "Experienced in completing commercial driver medical forms"
+msgstr "Expérimentés dans la complétion des formulaires médicaux pour conducteurs commerciaux"
+
+#: src/components/layout/footer.tsx:61
+#: src/components/layout/header.tsx:56
+#: src/components/layout/header.tsx:114
+msgid "FAQ"
+msgstr "FAQ"
+
+#: src/components/homepage/benefits.tsx:38
+msgid "Fast turnaround"
+msgstr "Délai rapide"
+
+#: src/components/homepage/how-it-works.tsx:17
+msgid "Fill out your complete medical history, health conditions, and required information through our secure online form."
+msgstr "Remplissez votre historique médical complet, vos conditions de santé et les informations requises via notre formulaire en ligne sécurisé."
+
+#: src/components/homepage/hero.tsx:97
+msgid "Form delivered by email"
+msgstr "Formulaire livré par courriel"
+
+#: src/components/homepage/faq.tsx:58
+msgid "Frequently asked questions"
+msgstr "Questions fréquemment posées"
+
+#: src/components/homepage/doctor-section.tsx:97
+#: src/components/homepage/pricing.tsx:242
+#: src/components/layout/header.tsx:68
+#: src/components/layout/header.tsx:125
+msgid "Get Started"
+msgstr "Commencer"
+
+#: src/components/homepage/hero.tsx:42
+msgid "Get your commercial driver medical form completed online with licensed Canadian physicians and nurses—fast turnaround and your form sent straight to your email. Some provinces require an in-person vision examination; we help coordinate it when yours does."
+msgstr "Complétez votre formulaire médical pour conducteur commercial en ligne avec des médecins et infirmières canadiens agréés — délai rapide et envoi direct du formulaire par courriel. Certaines provinces exigent un examen de la vision en personne ; nous vous aidons à le coordonner lorsque c'est le cas pour vous."
+
+#: src/components/homepage/benefits.tsx:22
+msgid "Get your completed form delivered to your email, typically within 24 hours."
+msgstr "Recevez votre formulaire complété par courriel, généralement dans les 24 heures."
+
+#: src/components/homepage/how-it-works.tsx:42
+msgid "Get your driver medical form completed in 4 simple steps."
+msgstr "Obtenez votre formulaire médical de conducteur en 4 étapes simples."
+
+#: src/app/[lang]/intake/[province]/summary/page.tsx:64
+msgid "Go Back"
+msgstr "Retour"
+
+#: src/components/homepage/how-it-works.tsx:39
+msgid "How it works"
+msgstr "Comment ça marche"
+
+#: src/components/layout/footer.tsx:37
+#: src/components/layout/header.tsx:38
+#: src/components/layout/header.tsx:93
+msgid "How It Works"
+msgstr "Comment ça marche"
+
+#: src/components/homepage/faq.tsx:24
+msgid "How long does the entire process take?"
+msgstr "Combien de temps dure le processus complet?"
+
+#: src/components/homepage/faq.tsx:39
+msgid "If the reviewing physician needs clarification or additional information, they will request it through the platform. In some cases, a brief online consultation may be required. You will be notified by email."
+msgstr "Si le médecin réviseur a besoin de précisions ou d'informations supplémentaires, il les demandera via la plateforme. Dans certains cas, une brève consultation en ligne pourrait être nécessaire. Vous serez notifié par courriel."
+
+#: src/components/homepage/benefits.tsx:19
+msgid "In Quebec, your in-person visit and completed form are typically finalized within 72 hours, depending on your availability."
+msgstr "Au Québec, votre visite en personne et la finalisation de votre formulaire ont généralement lieu dans les 72 heures, selon vos disponibilités."
+
+#: src/components/homepage/faq.tsx:51
+msgid "In rare cases where a physician cannot complete your form due to medical concerns requiring in-person evaluation, you will receive a full refund. The physician will provide guidance on next steps."
+msgstr "Dans les rares cas où un médecin ne peut pas compléter votre formulaire en raison de préoccupations médicales nécessitant une évaluation en personne, vous recevrez un remboursement complet. Le médecin vous fournira des conseils sur les prochaines étapes."
+
+#: src/components/homepage/hero.tsx:92
+msgid "In-person visit and form completed within 72 hours"
+msgstr "Visite en personne et formulaire complété dans les 72 heures"
+
+#: src/components/homepage/pricing.tsx:78
+msgid "In-person visit required for the vision (eye) examination"
+msgstr "Une visite en personne est requise pour l'examen de la vision (yeux)"
+
+#: src/components/homepage/faq.tsx:42
+msgid "Is my personal health information secure?"
+msgstr "Mes informations personnelles de santé sont-elles sécurisées?"
+
+#: src/components/homepage/faq.tsx:20
+msgid "Is the medical form accepted by provincial licensing authorities?"
+msgstr "Le formulaire médical est-il accepté par les autorités provinciales?"
+
+#: src/components/layout/footer.tsx:68
+msgid "Legal"
+msgstr "Légal"
+
+#: src/components/homepage/doctor-section.tsx:75
+msgid "Licensed and registered with provincial medical colleges"
+msgstr "Certifiés et inscrits auprès des collèges de médecins provinciaux"
+
+#: src/components/homepage/hero.tsx:31
+msgid "Licensed Canadian Physicians and Nurses"
+msgstr "Médecins et infirmières canadiens certifiés"
+
+#: src/components/homepage/benefits.tsx:33
+#: src/components/homepage/hero.tsx:125
+msgid "Licensed physicians and nurses"
+msgstr "Médecins et infirmières certifiés"
+
+#: src/components/homepage/doctor-section.tsx:52
+msgid "Licensed Physicians and Nurses"
+msgstr "Médecins et infirmières certifiés"
+
+#: src/components/layout/footer.tsx:110
+msgid "Mon-Sun: 8am - 10pm EST"
+msgstr "Lun-Dim: 8h - 22h HNE"
+
+#: src/components/homepage/testimonials.tsx:30
+msgid "My dispatcher told me about DriversMedical when my medical was expiring. Did the whole thing from my phone during my mandatory rest period. Professional doctor, quick process, and my company accepted the form no problem."
+msgstr "Mon répartiteur m'a parlé de DriversMedical quand mon médical allait expirer. J'ai fait tout ça depuis mon téléphone pendant ma période de repos obligatoire. Médecin professionnel, processus rapide, et ma compagnie a accepté le formulaire sans problème."
+
+#: src/app/[lang]/intake/[province]/summary/page.tsx:25
+msgid "No intake data found. Please start over."
+msgstr "Aucune donnée d'admission trouvée. Veuillez recommencer."
+
+#: src/components/homepage/pricing.tsx:68
+msgid "Official signed DL-1 form delivered digitally"
+msgstr "Formulaire DL-1 signé officiellement et livré en format numérique"
+
+#: src/components/homepage/pricing.tsx:80
+msgid "Official signed M-28 form aligned with SAAQ requirements"
+msgstr "Formulaire M-28 signé officiellement, conforme aux exigences de la SAAQ"
+
+#: src/components/homepage/pricing.tsx:210
+msgid "One simple price. No hidden fees or surprises."
+msgstr "Un prix simple. Aucuns frais cachés ni surprises."
+
+#: src/components/layout/footer.tsx:25
+msgid "Online driver medical exams by licensed Canadian physicians. Fast, secure, and convenient."
+msgstr "Examens médicaux de conducteur en ligne par des médecins canadiens agréés. Rapide, sécurisé et pratique."
+
+#: src/components/homepage/benefits.tsx:28
+#: src/components/homepage/hero.tsx:113
+msgid "Online Form"
+msgstr "En ligne"
+
+#: src/components/homepage/pricing.tsx:79
+msgid "Our clinic will call you within 72 hours to schedule your in-person appointment, depending on your availability"
+msgstr "Notre clinique vous appellera dans les 72 heures pour planifier votre rendez-vous en personne, selon vos disponibilités"
+
+#: src/components/homepage/how-it-works.tsx:30
+msgid "PDF format"
+msgstr "Format PDF"
+
+#: src/components/homepage/pricing.tsx:71
+#: src/components/homepage/pricing.tsx:83
+msgid "PIPEDA-compliant, encrypted intake"
+msgstr "Dossier d'admission chiffré et conforme à la LPRPDE"
+
+#: src/app/[lang]/intake/[province]/summary/page.tsx:52
+msgid "Please review your information for the {provinceName} driver's medical form before submitting."
+msgstr "Veuillez réviser vos informations pour le formulaire médical de conducteur du {provinceName} avant de soumettre."
+
+#: src/components/layout/footer.tsx:53
+msgid "Pricing"
+msgstr "Tarification"
+
+#: src/components/layout/footer.tsx:75
+msgid "Privacy Policy"
+msgstr "Politique de confidentialité"
+
+#: src/components/homepage/home-province-select.tsx:46
+msgid "Province"
+msgstr "Province"
+
+#: src/components/homepage/hero.tsx:119
+msgid "Province-specific forms"
+msgstr "Spécifiques à la province"
+
+#: src/components/homepage/how-it-works.tsx:28
+msgid "Receive your signed form"
+msgstr "Recevez votre formulaire signé"
+
+#: src/components/homepage/pricing.tsx:67
+msgid "Review by a licensed physician or nurse in New Brunswick"
+msgstr "Révision par un médecin ou une infirmière autorisés au Nouveau-Brunswick"
+
+#: src/components/homepage/pricing.tsx:77
+msgid "Review by a licensed physician or nurse in Quebec"
+msgstr "Révision par un médecin ou une infirmière autorisés au Québec"
+
+#: src/app/[lang]/intake/[province]/summary/page.tsx:49
+msgid "Review Your Answers"
+msgstr "Révisez vos réponses"
+
+#: src/components/homepage/pricing.tsx:70
+#: src/components/homepage/pricing.tsx:82
+msgid "Same-day processing when you qualify"
+msgstr "Traitement le jour même lorsque vous êtes admissible"
+
+#: src/components/homepage/pricing.tsx:247
+msgid "Secure payment processed after intake completion. Full refund if one of our providers cannot complete your form."
+msgstr "Paiement sécurisé traité après la complétion de l'admission. Remboursement complet si un de nos professionels de la santé ne peut pas compléter votre formulaire."
+
+#: src/components/homepage/pricing.tsx:69
+#: src/components/homepage/pricing.tsx:81
+msgid "Secure PDF emailed to you, ready to submit"
+msgstr "PDF sécurisé envoyé par courriel, prêt à soumettre"
+
+#: src/components/homepage/hero.tsx:50
+msgid "See If I'm Eligible"
+msgstr "Vérifier mon admissibilité"
+
+#: src/components/homepage/testimonials.tsx:43
+msgid "See what other drivers are saying about their experience."
+msgstr "Découvrez ce que les autres conducteurs disent de leur expérience."
+
+#: src/components/homepage/home-province-select.tsx:60
+#: src/components/homepage/home-province-select.tsx:62
+#: src/components/homepage/how-it-works.tsx:10
+#: src/components/homepage/pricing.tsx:127
+#: src/components/homepage/pricing.tsx:129
+#: src/components/homepage/pricing.tsx:131
+msgid "Select your province"
+msgstr "Sélectionnez votre province"
+
+#: src/components/layout/footer.tsx:30
+msgid "Service"
+msgstr "Service"
+
+#: src/components/homepage/pricing.tsx:180
+msgid "Soon available"
+msgstr "Bientôt disponible"
+
+#: src/components/homepage/how-it-works.tsx:12
+msgid "Start here"
+msgstr "Commencez ici"
+
+#: src/app/[lang]/intake/[province]/summary/page.tsx:31
+msgid "Start Over"
+msgstr "Recommencer"
+
+#: src/app/[lang]/intake/[province]/summary/page.tsx:72
+msgid "Submit Application"
+msgstr "Soumettre la demande"
+
+#: src/components/homepage/pricing.tsx:72
+#: src/components/homepage/pricing.tsx:84
+msgid "Support available 7 days a week"
+msgstr "Support disponible 7 jours sur 7"
+
+#: src/components/layout/footer.tsx:91
+msgid "Telehealth Consent"
+msgstr "Consentement à la télésanté"
+
+#: src/components/homepage/hero.tsx:28
+msgid "Telehealth Service"
+msgstr "Service de télésanté"
+
+#: src/components/layout/footer.tsx:123
+msgid "Telehealth services provided by licensed Canadian physicians."
+msgstr "Services de télésanté fournis par des médecins canadiens agréés."
+
+#: src/components/layout/footer.tsx:83
+msgid "Terms of Service"
+msgstr "Conditions d'utilisation"
+
+#: src/components/layout/header.tsx:50
+#: src/components/layout/header.tsx:107
+msgid "Testimonials"
+msgstr "Témoignages"
+
+#: src/components/homepage/faq.tsx:25
+msgid "The online intake takes about 10-15 minutes. Once submitted, a physician or nurse reviews your case and completes your form, typically within 24 hours. Your completed and signed form is then delivered to your email in PDF format."
+msgstr "Le questionnaire en ligne prend environ 10 à 15 minutes. Une fois soumis, un médecin ou infirmière examine votre dossier et complète votre formulaire, généralement dans les 24 heures. Votre formulaire complété et signé est ensuite livré à votre courriel en format PDF."
+
+#: src/components/homepage/doctor-section.tsx:87
+msgid "Thorough examinations following provincial guidelines"
+msgstr "Examens approfondis selon les directives provinciales"
+
+#: src/components/homepage/testimonials.tsx:40
+msgid "Trusted by drivers across Canada"
+msgstr "La confiance des conducteurs partout au Canada"
+
+#: src/components/homepage/faq.tsx:29
+msgid "We currently support New Brunswick and Quebec, with more provinces being added soon. Each province has its own specific medical form, and our platform handles the correct form for your jurisdiction."
+msgstr "Nous supportons actuellement le Nouveau-Brunswick et le Québec, avec d'autres provinces à venir bientôt. Chaque province a son propre formulaire médical spécifique, et notre plateforme gère le bon formulaire pour votre juridiction."
+
+#: src/components/homepage/pricing.tsx:194
+msgid "We matched your location to show the right price. Change the province above if needed."
+msgstr "Nous avons utilisé votre emplacement pour afficher le bon prix. Modifiez la province ci-dessus au besoin."
+
+#: src/components/homepage/faq.tsx:47
+msgid "We support medical examinations for commercial driver licence (Class 1-4) renewals and new applications. The specific form and questions are tailored to your province."
+msgstr "Nous supportons les examens médicaux pour les renouvellements et nouvelles demandes de permis de conducteur commercial (Classe 1-4). Le formulaire spécifique et les questions sont adaptés à votre province."
+
+#: src/components/intake/province-selector.tsx:36
+msgid "We'll load the right form and questions for your province."
+msgstr "Nous chargerons le bon formulaire et les bonnes questions pour votre province."
+
+#: src/components/homepage/faq.tsx:50
+msgid "What if the physician cannot complete my medical form?"
+msgstr "Que se passe-t-il si le médecin ne peut pas compléter mon formulaire?"
+
+#: src/components/homepage/faq.tsx:38
+msgid "What if the physician needs more information?"
+msgstr "Que se passe-t-il si le médecin a besoin de plus d'informations?"
+
+#: src/components/homepage/faq.tsx:16
+msgid "What is DriversMedical.clinic?"
+msgstr "Qu'est-ce que DriversMedical.clinic?"
+
+#: src/components/homepage/faq.tsx:46
+msgid "What types of driver medical exams do you offer?"
+msgstr "Quels types d'examens médicaux de conducteur offrez-vous?"
+
+#: src/components/homepage/faq.tsx:33
+msgid ""
+"Whether you need an in-person visit depends on your province and what is required to complete your examination—for example, some provinces require an in-person vision (eye) examination.\n"
+"\n"
+"If an in-person visit is required, our clinic will call you the same day to schedule an appointment at one of our clinics, within 72 hours."
+msgstr ""
+"Le besoin d'une visite en personne dépend de votre province et de ce qui est requis pour compléter votre examen — par exemple, certaines provinces exigent un examen de la vision (yeux) en personne.\n"
+"\n"
+"Si une visite en personne est requise, notre clinique vous appellera le jour même pour fixer un rendez-vous dans l'une de nos cliniques, dans les 72 heures."
+
+#: src/components/intake/province-selector.tsx:33
+msgid "Which province is your driver's medical form for?"
+msgstr "Pour quelle province est votre formulaire médical de conducteur?"
+
+#: src/components/homepage/faq.tsx:28
+msgid "Which provinces are supported?"
+msgstr "Quelles provinces sont supportées?"
+
+#: src/components/homepage/benefits.tsx:53
+msgid "Why drivers choose us"
+msgstr "Pourquoi les conducteurs nous choisissent"
+
+#: src/components/homepage/faq.tsx:32
+msgid "Will it require an in-person appointment?"
+msgstr "Une visite en personne sera-t-elle requise?"
+
+#: src/components/homepage/hero.tsx:100
+#: src/components/homepage/how-it-works.tsx:24
+msgid "Within 24 hours"
+msgstr "Dans les 24 heures"
+
+#: src/components/homepage/faq.tsx:21
+msgid "Yes. Our physicians are licensed in Canada and authorized to complete driver medical forms. The forms we provide are province-specific and meet all provincial requirements."
+msgstr "Oui. Nos médecins sont agréés au Canada et autorisés à remplir les formulaires médicaux de conducteur. Les formulaires que nous fournissons sont spécifiques à la province et répondent à toutes les exigences provinciales."
+
+#: src/components/homepage/how-it-works.tsx:29
+msgid "Your completed and signed driver medical form is delivered directly to your email, ready to submit to your licensing authority."
+msgstr "Votre formulaire médical de conducteur complété et signé est livré directement à votre courriel, prêt à soumettre à votre autorité de permis."
+
+#: src/components/homepage/benefits.tsx:44
+msgid "Your completed form is sent directly to your email in PDF format, ready to submit."
+msgstr "Votre formulaire complété est envoyé directement à votre courriel en format PDF, prêt à soumettre."

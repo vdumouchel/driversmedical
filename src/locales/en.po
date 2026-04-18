@@ -1,0 +1,484 @@
+msgid ""
+msgstr ""
+"Language: en\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Content-Type: \n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#: src/components/homepage/how-it-works.tsx:18
+msgid "10-15 minutes"
+msgstr "10-15 minutes"
+
+#: src/components/homepage/how-it-works.tsx:23
+msgid "A licensed Canadian physician or nurse reviews your information and completes your official driver medical form."
+msgstr "A licensed Canadian physician or nurse reviews your information and completes your official driver medical form."
+
+#: src/components/homepage/how-it-works.tsx:22
+msgid "A provider reviews your case"
+msgstr "A provider reviews your case"
+
+#: src/components/homepage/faq.tsx:43
+msgid "Absolutely. Our platform is fully PIPEDA-compliant, and all data is encrypted at rest and in transit. Your health information is stored securely and never shared without your explicit consent."
+msgstr "Absolutely. Our platform is fully PIPEDA-compliant, and all data is encrypted at rest and in transit. Your health information is stored securely and never shared without your explicit consent."
+
+#: src/components/homepage/testimonials.tsx:15
+msgid "After 20 years on the road, I know how hard it is to schedule appointments around my routes. Filled out the online form at a rest stop, and had my medical in my email before my next delivery. This is how it should be done."
+msgstr "After 20 years on the road, I know how hard it is to schedule appointments around my routes. Filled out the online form at a rest stop, and had my medical in my email before my next delivery. This is how it should be done."
+
+#: src/components/layout/footer.tsx:120
+msgid "All rights reserved."
+msgstr "All rights reserved."
+
+#: src/components/homepage/pricing.tsx:104
+msgid "All-Inclusive Price"
+msgstr "All-Inclusive Price"
+
+#: src/components/homepage/testimonials.tsx:23
+msgid "As an owner-operator, every day off the road costs me money. DriversMedical let me renew my medical without losing a load. The online form covered everything, and I had my form the next day."
+msgstr "As an owner-operator, every day off the road costs me money. DriversMedical let me renew my medical without losing a load. The online form covered everything, and I had my form the next day."
+
+#: src/components/layout/footer.tsx:45
+#: src/components/layout/header.tsx:44
+#: src/components/layout/header.tsx:100
+msgid "Benefits"
+msgstr "Benefits"
+
+#: src/components/homepage/doctor-section.tsx:55
+msgid "Certified in Canada"
+msgstr "Certified in Canada"
+
+#: src/components/homepage/home-province-select.tsx:54
+msgid "Choose province for personalized content"
+msgstr "Choose province for personalized content"
+
+#: src/components/homepage/how-it-works.tsx:11
+msgid "Choose your province so we load the correct driver medical form and questions for your jurisdiction."
+msgstr "Choose your province so we load the correct driver medical form and questions for your jurisdiction."
+
+#: src/components/intake/province-selector.tsx:78
+msgid "Coming Soon"
+msgstr "Coming Soon"
+
+#: src/components/homepage/hero.tsx:77
+msgid "Commercial driver completing an online driver medical form"
+msgstr "Commercial driver completing an online driver medical form"
+
+#: src/components/homepage/pricing.tsx:66
+msgid "Complete your DL-1 driver medical questionnaire online"
+msgstr "Complete your DL-1 driver medical questionnaire online"
+
+#: src/components/homepage/benefits.tsx:29
+msgid "Complete your entire medical form from your phone, tablet, or computer. *In person visits required depending on your province.*"
+msgstr "Complete your entire medical form from your phone, tablet, or computer. *In person visits required depending on your province.*"
+
+#: src/components/homepage/pricing.tsx:76
+msgid "Complete your M-28 commercial driver medical questionnaire online"
+msgstr "Complete your M-28 commercial driver medical questionnaire online"
+
+#: src/components/homepage/how-it-works.tsx:16
+msgid "Complete your medical form online"
+msgstr "Complete your medical form online"
+
+#: src/components/layout/footer.tsx:98
+msgid "Contact"
+msgstr "Contact"
+
+#: src/components/homepage/hero.tsx:38
+msgid "Done Online."
+msgstr "Done Online."
+
+#: src/components/homepage/hero.tsx:36
+msgid "Driver's Medical."
+msgstr "Driver's Medical."
+
+#: src/components/homepage/faq.tsx:17
+msgid "DriversMedical.clinic is a telemedicine platform that allows commercial drivers to get their required driver medical forms completed online. You fill out a secure online intake, a licensed physician or nurse reviews your information, and your completed form is delivered digitally."
+msgstr "DriversMedical.clinic is a telemedicine platform that allows commercial drivers to get their required driver medical forms completed online. You fill out a secure online intake, a licensed physician or nurse reviews your information, and your completed form is delivered digitally."
+
+#: src/components/homepage/benefits.tsx:43
+msgid "Email delivery"
+msgstr "Email delivery"
+
+#: src/components/homepage/doctor-section.tsx:68
+msgid "Every driver medical examination is conducted by physicians licensed to practice in Canada and authorized to complete driver medical forms."
+msgstr "Every driver medical examination is conducted by physicians licensed to practice in Canada and authorized to complete driver medical forms."
+
+#: src/components/homepage/benefits.tsx:34
+msgid "Every form is reviewed and signed by a physician or nurse licensed to practice in your province."
+msgstr "Every form is reviewed and signed by a physician or nurse licensed to practice in your province."
+
+#: src/components/homepage/benefits.tsx:56
+msgid "Everything you need for your driver medical form"
+msgstr "Everything you need for your driver medical form"
+
+#: src/components/homepage/faq.tsx:61
+msgid "Everything you need to know about our online driver medical exam service."
+msgstr "Everything you need to know about our online driver medical exam service."
+
+#: src/components/homepage/doctor-section.tsx:64
+msgid "Examinations by certified Canadian healthcare specialists"
+msgstr "Examinations by certified Canadian healthcare specialists"
+
+#: src/components/homepage/doctor-section.tsx:81
+msgid "Experienced in completing commercial driver medical forms"
+msgstr "Experienced in completing commercial driver medical forms"
+
+#: src/components/layout/footer.tsx:61
+#: src/components/layout/header.tsx:56
+#: src/components/layout/header.tsx:114
+msgid "FAQ"
+msgstr "FAQ"
+
+#: src/components/homepage/benefits.tsx:38
+msgid "Fast turnaround"
+msgstr "Fast turnaround"
+
+#: src/components/homepage/how-it-works.tsx:17
+msgid "Fill out your complete medical history, health conditions, and required information through our secure online form."
+msgstr "Fill out your complete medical history, health conditions, and required information through our secure online form."
+
+#: src/components/homepage/hero.tsx:97
+msgid "Form delivered by email"
+msgstr "Form delivered by email"
+
+#: src/components/homepage/faq.tsx:58
+msgid "Frequently asked questions"
+msgstr "Frequently asked questions"
+
+#: src/components/homepage/doctor-section.tsx:97
+#: src/components/homepage/pricing.tsx:242
+#: src/components/layout/header.tsx:68
+#: src/components/layout/header.tsx:125
+msgid "Get Started"
+msgstr "Get Started"
+
+#: src/components/homepage/hero.tsx:42
+msgid "Get your commercial driver medical form completed online with licensed Canadian physicians and nurses—fast turnaround and your form sent straight to your email. Some provinces require an in-person vision examination; we help coordinate it when yours does."
+msgstr "Get your commercial driver medical form completed online with licensed Canadian physicians and nurses—fast turnaround and your form sent straight to your email. Some provinces require an in-person vision examination; we help coordinate it when yours does."
+
+#: src/components/homepage/benefits.tsx:22
+msgid "Get your completed form delivered to your email, typically within 24 hours."
+msgstr "Get your completed form delivered to your email, typically within 24 hours."
+
+#: src/components/homepage/how-it-works.tsx:42
+msgid "Get your driver medical form completed in 4 simple steps."
+msgstr "Get your driver medical form completed in 4 simple steps."
+
+#: src/app/[lang]/intake/[province]/summary/page.tsx:64
+msgid "Go Back"
+msgstr "Go Back"
+
+#: src/components/homepage/how-it-works.tsx:39
+msgid "How it works"
+msgstr "How it works"
+
+#: src/components/layout/footer.tsx:37
+#: src/components/layout/header.tsx:38
+#: src/components/layout/header.tsx:93
+msgid "How It Works"
+msgstr "How It Works"
+
+#: src/components/homepage/faq.tsx:24
+msgid "How long does the entire process take?"
+msgstr "How long does the entire process take?"
+
+#: src/components/homepage/faq.tsx:39
+msgid "If the reviewing physician needs clarification or additional information, they will request it through the platform. In some cases, a brief online consultation may be required. You will be notified by email."
+msgstr "If the reviewing physician needs clarification or additional information, they will request it through the platform. In some cases, a brief online consultation may be required. You will be notified by email."
+
+#: src/components/homepage/benefits.tsx:19
+msgid "In Quebec, your in-person visit and completed form are typically finalized within 72 hours, depending on your availability."
+msgstr "In Quebec, your in-person visit and completed form are typically finalized within 72 hours, depending on your availability."
+
+#: src/components/homepage/faq.tsx:51
+msgid "In rare cases where a physician cannot complete your form due to medical concerns requiring in-person evaluation, you will receive a full refund. The physician will provide guidance on next steps."
+msgstr "In rare cases where a physician cannot complete your form due to medical concerns requiring in-person evaluation, you will receive a full refund. The physician will provide guidance on next steps."
+
+#: src/components/homepage/hero.tsx:92
+msgid "In-person visit and form completed within 72 hours"
+msgstr "In-person visit and form completed within 72 hours"
+
+#: src/components/homepage/pricing.tsx:78
+msgid "In-person visit required for the vision (eye) examination"
+msgstr "In-person visit required for the vision (eye) examination"
+
+#: src/components/homepage/faq.tsx:42
+msgid "Is my personal health information secure?"
+msgstr "Is my personal health information secure?"
+
+#: src/components/homepage/faq.tsx:20
+msgid "Is the medical form accepted by provincial licensing authorities?"
+msgstr "Is the medical form accepted by provincial licensing authorities?"
+
+#: src/components/layout/footer.tsx:68
+msgid "Legal"
+msgstr "Legal"
+
+#: src/components/homepage/doctor-section.tsx:75
+msgid "Licensed and registered with provincial medical colleges"
+msgstr "Licensed and registered with provincial medical colleges"
+
+#: src/components/homepage/hero.tsx:31
+msgid "Licensed Canadian Physicians and Nurses"
+msgstr "Licensed Canadian Physicians and Nurses"
+
+#: src/components/homepage/benefits.tsx:33
+#: src/components/homepage/hero.tsx:125
+msgid "Licensed physicians and nurses"
+msgstr "Licensed physicians and nurses"
+
+#: src/components/homepage/doctor-section.tsx:52
+msgid "Licensed Physicians and Nurses"
+msgstr "Licensed Physicians and Nurses"
+
+#: src/components/layout/footer.tsx:110
+msgid "Mon-Sun: 8am - 10pm EST"
+msgstr "Mon-Sun: 8am - 10pm EST"
+
+#: src/components/homepage/testimonials.tsx:30
+msgid "My dispatcher told me about DriversMedical when my medical was expiring. Did the whole thing from my phone during my mandatory rest period. Professional doctor, quick process, and my company accepted the form no problem."
+msgstr "My dispatcher told me about DriversMedical when my medical was expiring. Did the whole thing from my phone during my mandatory rest period. Professional doctor, quick process, and my company accepted the form no problem."
+
+#: src/app/[lang]/intake/[province]/summary/page.tsx:25
+msgid "No intake data found. Please start over."
+msgstr "No intake data found. Please start over."
+
+#: src/components/homepage/pricing.tsx:68
+msgid "Official signed DL-1 form delivered digitally"
+msgstr "Official signed DL-1 form delivered digitally"
+
+#: src/components/homepage/pricing.tsx:80
+msgid "Official signed M-28 form aligned with SAAQ requirements"
+msgstr "Official signed M-28 form aligned with SAAQ requirements"
+
+#: src/components/homepage/pricing.tsx:210
+msgid "One simple price. No hidden fees or surprises."
+msgstr "One simple price. No hidden fees or surprises."
+
+#: src/components/layout/footer.tsx:25
+msgid "Online driver medical exams by licensed Canadian physicians. Fast, secure, and convenient."
+msgstr "Online driver medical exams by licensed Canadian physicians. Fast, secure, and convenient."
+
+#: src/components/homepage/benefits.tsx:28
+#: src/components/homepage/hero.tsx:113
+msgid "Online Form"
+msgstr "Online Form"
+
+#: src/components/homepage/pricing.tsx:79
+msgid "Our clinic will call you within 72 hours to schedule your in-person appointment, depending on your availability"
+msgstr "Our clinic will call you within 72 hours to schedule your in-person appointment, depending on your availability"
+
+#: src/components/homepage/how-it-works.tsx:30
+msgid "PDF format"
+msgstr "PDF format"
+
+#: src/components/homepage/pricing.tsx:71
+#: src/components/homepage/pricing.tsx:83
+msgid "PIPEDA-compliant, encrypted intake"
+msgstr "PIPEDA-compliant, encrypted intake"
+
+#: src/app/[lang]/intake/[province]/summary/page.tsx:52
+msgid "Please review your information for the {provinceName} driver's medical form before submitting."
+msgstr "Please review your information for the {provinceName} driver's medical form before submitting."
+
+#: src/components/layout/footer.tsx:53
+msgid "Pricing"
+msgstr "Pricing"
+
+#: src/components/layout/footer.tsx:75
+msgid "Privacy Policy"
+msgstr "Privacy Policy"
+
+#: src/components/homepage/home-province-select.tsx:46
+msgid "Province"
+msgstr "Province"
+
+#: src/components/homepage/hero.tsx:119
+msgid "Province-specific forms"
+msgstr "Province-specific forms"
+
+#: src/components/homepage/how-it-works.tsx:28
+msgid "Receive your signed form"
+msgstr "Receive your signed form"
+
+#: src/components/homepage/pricing.tsx:67
+msgid "Review by a licensed physician or nurse in New Brunswick"
+msgstr "Review by a licensed physician or nurse in New Brunswick"
+
+#: src/components/homepage/pricing.tsx:77
+msgid "Review by a licensed physician or nurse in Quebec"
+msgstr "Review by a licensed physician or nurse in Quebec"
+
+#: src/app/[lang]/intake/[province]/summary/page.tsx:49
+msgid "Review Your Answers"
+msgstr "Review Your Answers"
+
+#: src/components/homepage/pricing.tsx:70
+#: src/components/homepage/pricing.tsx:82
+msgid "Same-day processing when you qualify"
+msgstr "Same-day processing when you qualify"
+
+#: src/components/homepage/pricing.tsx:247
+msgid "Secure payment processed after intake completion. Full refund if one of our providers cannot complete your form."
+msgstr "Secure payment processed after intake completion. Full refund if one of our providers cannot complete your form."
+
+#: src/components/homepage/pricing.tsx:69
+#: src/components/homepage/pricing.tsx:81
+msgid "Secure PDF emailed to you, ready to submit"
+msgstr "Secure PDF emailed to you, ready to submit"
+
+#: src/components/homepage/hero.tsx:50
+msgid "See If I'm Eligible"
+msgstr "See If I'm Eligible"
+
+#: src/components/homepage/testimonials.tsx:43
+msgid "See what other drivers are saying about their experience."
+msgstr "See what other drivers are saying about their experience."
+
+#: src/components/homepage/home-province-select.tsx:60
+#: src/components/homepage/home-province-select.tsx:62
+#: src/components/homepage/how-it-works.tsx:10
+#: src/components/homepage/pricing.tsx:127
+#: src/components/homepage/pricing.tsx:129
+#: src/components/homepage/pricing.tsx:131
+msgid "Select your province"
+msgstr "Select your province"
+
+#: src/components/layout/footer.tsx:30
+msgid "Service"
+msgstr "Service"
+
+#: src/components/homepage/pricing.tsx:180
+msgid "Soon available"
+msgstr "Soon available"
+
+#: src/components/homepage/how-it-works.tsx:12
+msgid "Start here"
+msgstr "Start here"
+
+#: src/app/[lang]/intake/[province]/summary/page.tsx:31
+msgid "Start Over"
+msgstr "Start Over"
+
+#: src/app/[lang]/intake/[province]/summary/page.tsx:72
+msgid "Submit Application"
+msgstr "Submit Application"
+
+#: src/components/homepage/pricing.tsx:72
+#: src/components/homepage/pricing.tsx:84
+msgid "Support available 7 days a week"
+msgstr "Support available 7 days a week"
+
+#: src/components/layout/footer.tsx:91
+msgid "Telehealth Consent"
+msgstr "Telehealth Consent"
+
+#: src/components/homepage/hero.tsx:28
+msgid "Telehealth Service"
+msgstr "Telehealth Service"
+
+#: src/components/layout/footer.tsx:123
+msgid "Telehealth services provided by licensed Canadian physicians."
+msgstr "Telehealth services provided by licensed Canadian physicians."
+
+#: src/components/layout/footer.tsx:83
+msgid "Terms of Service"
+msgstr "Terms of Service"
+
+#: src/components/layout/header.tsx:50
+#: src/components/layout/header.tsx:107
+msgid "Testimonials"
+msgstr "Testimonials"
+
+#: src/components/homepage/faq.tsx:25
+msgid "The online intake takes about 10-15 minutes. Once submitted, a physician or nurse reviews your case and completes your form, typically within 24 hours. Your completed and signed form is then delivered to your email in PDF format."
+msgstr "The online intake takes about 10-15 minutes. Once submitted, a physician or nurse reviews your case and completes your form, typically within 24 hours. Your completed and signed form is then delivered to your email in PDF format."
+
+#: src/components/homepage/doctor-section.tsx:87
+msgid "Thorough examinations following provincial guidelines"
+msgstr "Thorough examinations following provincial guidelines"
+
+#: src/components/homepage/testimonials.tsx:40
+msgid "Trusted by drivers across Canada"
+msgstr "Trusted by drivers across Canada"
+
+#: src/components/homepage/faq.tsx:29
+msgid "We currently support New Brunswick and Quebec, with more provinces being added soon. Each province has its own specific medical form, and our platform handles the correct form for your jurisdiction."
+msgstr "We currently support New Brunswick and Quebec, with more provinces being added soon. Each province has its own specific medical form, and our platform handles the correct form for your jurisdiction."
+
+#: src/components/homepage/pricing.tsx:194
+msgid "We matched your location to show the right price. Change the province above if needed."
+msgstr "We matched your location to show the right price. Change the province above if needed."
+
+#: src/components/homepage/faq.tsx:47
+msgid "We support medical examinations for commercial driver licence (Class 1-4) renewals and new applications. The specific form and questions are tailored to your province."
+msgstr "We support medical examinations for commercial driver licence (Class 1-4) renewals and new applications. The specific form and questions are tailored to your province."
+
+#: src/components/intake/province-selector.tsx:36
+msgid "We'll load the right form and questions for your province."
+msgstr "We'll load the right form and questions for your province."
+
+#: src/components/homepage/faq.tsx:50
+msgid "What if the physician cannot complete my medical form?"
+msgstr "What if the physician cannot complete my medical form?"
+
+#: src/components/homepage/faq.tsx:38
+msgid "What if the physician needs more information?"
+msgstr "What if the physician needs more information?"
+
+#: src/components/homepage/faq.tsx:16
+msgid "What is DriversMedical.clinic?"
+msgstr "What is DriversMedical.clinic?"
+
+#: src/components/homepage/faq.tsx:46
+msgid "What types of driver medical exams do you offer?"
+msgstr "What types of driver medical exams do you offer?"
+
+#: src/components/homepage/faq.tsx:33
+msgid ""
+"Whether you need an in-person visit depends on your province and what is required to complete your examination—for example, some provinces require an in-person vision (eye) examination.\n"
+"\n"
+"If an in-person visit is required, our clinic will call you the same day to schedule an appointment at one of our clinics, within 72 hours."
+msgstr ""
+"Whether you need an in-person visit depends on your province and what is required to complete your examination—for example, some provinces require an in-person vision (eye) examination.\n"
+"\n"
+"If an in-person visit is required, our clinic will call you the same day to schedule an appointment at one of our clinics, within 72 hours."
+
+#: src/components/intake/province-selector.tsx:33
+msgid "Which province is your driver's medical form for?"
+msgstr "Which province is your driver's medical form for?"
+
+#: src/components/homepage/faq.tsx:28
+msgid "Which provinces are supported?"
+msgstr "Which provinces are supported?"
+
+#: src/components/homepage/benefits.tsx:53
+msgid "Why drivers choose us"
+msgstr "Why drivers choose us"
+
+#: src/components/homepage/faq.tsx:32
+msgid "Will it require an in-person appointment?"
+msgstr "Will it require an in-person appointment?"
+
+#: src/components/homepage/hero.tsx:100
+#: src/components/homepage/how-it-works.tsx:24
+msgid "Within 24 hours"
+msgstr "Within 24 hours"
+
+#: src/components/homepage/faq.tsx:21
+msgid "Yes. Our physicians are licensed in Canada and authorized to complete driver medical forms. The forms we provide are province-specific and meet all provincial requirements."
+msgstr "Yes. Our physicians are licensed in Canada and authorized to complete driver medical forms. The forms we provide are province-specific and meet all provincial requirements."
+
+#: src/components/homepage/how-it-works.tsx:29
+msgid "Your completed and signed driver medical form is delivered directly to your email, ready to submit to your licensing authority."
+msgstr "Your completed and signed driver medical form is delivered directly to your email, ready to submit to your licensing authority."
+
+#: src/components/homepage/benefits.tsx:44
+msgid "Your completed form is sent directly to your email in PDF format, ready to submit."
+msgstr "Your completed form is sent directly to your email in PDF format, ready to submit."
