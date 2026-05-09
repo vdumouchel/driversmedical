@@ -24,7 +24,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useLocalePath, useLang } from "@/lib/i18n-utils";
+import { useLocalePath, useLang } from "@/lib/i18n-hooks";
 import { cn } from "@/lib/utils";
 
 export function Pricing({

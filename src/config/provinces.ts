@@ -1,6 +1,25 @@
-import type { ProvinceSchema } from "@/schemas/types";
+import type { LocalizedString, ProvinceSchema } from "@/schemas/types";
 import { newBrunswickSchema } from "@/schemas/new-brunswick";
-import { quebecSchema } from "@/schemas/quebec";
+import {
+  quebecSchema,
+  quebecClinics,
+  quebecInPersonCopy,
+} from "@/schemas/quebec";
+
+/**
+ * A bookable in-person appointment location (clinic, lab, partner, …).
+ * Display strings use the same `LocalizedString` shape as every other
+ * province-specific string — typically inline `{ en, fr }` literals
+ * authored in the province's own schema file.
+ */
+export type InPersonAppointment = {
+  /** Stable id persisted in answers / DB. */
+  id: string;
+  name: LocalizedString;
+  address: LocalizedString;
+  /** Combined "name — address" used as the option-select label. */
+  label: LocalizedString;
+};
 
 export type ProvinceContent = {
   slug: string;
@@ -16,6 +35,13 @@ export type ProvinceContent = {
   pricingFeatures?: { en: string[]; fr: string[] };
   /** Intake form schema; present iff the province is available and active. */
   schema?: ProvinceSchema;
+  /**
+   * Clinics / labs the applicant must pick from (for provinces that mandate
+   * an in-person component, e.g. Quebec eye exam).
+   */
+  inPersonAppointments?: readonly InPersonAppointment[];
+  /** Intro / explanation copy shown above the appointment selector. */
+  inPersonAppointmentCopy?: LocalizedString;
 };
 
 export const provinces = {
@@ -90,6 +116,8 @@ export const provinces = {
       ],
     },
     schema: quebecSchema,
+    inPersonAppointments: quebecClinics,
+    inPersonAppointmentCopy: quebecInPersonCopy,
   },
   ontario: { slug: "ontario", code: "ON", nameEn: "Ontario", nameFr: "Ontario", available: false },
   alberta: { slug: "alberta", code: "AB", nameEn: "Alberta", nameFr: "Alberta", available: false },

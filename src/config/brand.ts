@@ -24,6 +24,23 @@ export const brand = {
       fr: "Lun-Dim: 8h - 22h HNE",
     } satisfies LocalizedString,
   },
+  // Mailing address printed on receipts under "From" / "De". Edit these
+  // lines to update the address that appears on every customer receipt.
+  // Each entry is one printed line; add or remove lines as needed.
+  address: {
+    en: [
+      "DriversMedical.clinic",
+      "123 Main Street, Suite 100",
+      "Toronto, ON M5V 2T6",
+      "Canada",
+    ],
+    fr: [
+      "DriversMedical.clinic",
+      "123, rue Main, bureau 100",
+      "Toronto (ON) M5V 2T6",
+      "Canada",
+    ],
+  } satisfies { en: readonly string[]; fr: readonly string[] },
   footer: {
     tagline: {
       en: "Online driver medical exams by licensed Canadian physicians. Fast, secure, and convenient.",

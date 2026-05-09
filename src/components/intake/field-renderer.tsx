@@ -2,10 +2,22 @@
 
 import { useState } from "react";
 import type { FormField } from "@/schemas/types";
+import { validateField } from "@/schemas/validation";
+import { resolveLS } from "@/lib/i18n-utils";
+import { useLang } from "@/lib/i18n-hooks";
 import { OptionButton } from "./option-button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
+
+// Clamp <input type="date"> year to 4 digits so it auto-advances to month/day.
+function clampDateYear(value: string): string {
+  const m = /^(\d+)(-\d{2}-\d{2})$/.exec(value);
+  if (!m) return value;
+  const [, year, rest] = m;
+  if (year.length <= 4) return value;
+  return year.slice(0, 4) + rest;
+}
 
 interface FieldRendererProps {
   field: FormField;
@@ -20,6 +32,11 @@ export function FieldRenderer({
   onSubmit,
   error,
 }: FieldRendererProps) {
+  const lang = useLang();
+  const label = resolveLS(field.label, lang);
+  const description = field.description ? resolveLS(field.description, lang) : undefined;
+  const placeholder = field.placeholder ? resolveLS(field.placeholder, lang) : undefined;
+
   const [localValue, setLocalValue] = useState<string>(
     value !== undefined ? String(value) : ""
   );
@@ -39,33 +56,25 @@ export function FieldRenderer({
     }
   }
 
-  // Yes/No — two large buttons, auto-advance
   if (field.type === "yes-no") {
+    const yes = lang === "fr" ? "Oui" : "Yes";
+    const no = lang === "fr" ? "Non" : "No";
     return (
       <div className="space-y-3 w-full max-w-md">
-        <OptionButton
-          label="Yes"
-          selected={value === "yes"}
-          onClick={() => onSubmit("yes")}
-        />
-        <OptionButton
-          label="No"
-          selected={value === "no"}
-          onClick={() => onSubmit("no")}
-        />
+        <OptionButton label={yes} selected={value === "yes"} onClick={() => onSubmit("yes")} />
+        <OptionButton label={no} selected={value === "no"} onClick={() => onSubmit("no")} />
       </div>
     );
   }
 
-  // Option select — multiple buttons, auto-advance
   if (field.type === "option-select" && field.options) {
     return (
       <div className="space-y-3 w-full max-w-md">
         {field.options.map((opt) => (
           <OptionButton
             key={opt.value}
-            label={opt.label}
-            description={opt.description}
+            label={resolveLS(opt.label, lang)}
+            description={opt.description ? resolveLS(opt.description, lang) : undefined}
             selected={value === opt.value}
             onClick={() => onSubmit(opt.value)}
           />
@@ -74,28 +83,23 @@ export function FieldRenderer({
     );
   }
 
-  // Checkbox
   if (field.type === "checkbox") {
     return (
       <div className="w-full max-w-md">
         <label className="flex items-start gap-3 cursor-pointer">
           <Checkbox
             checked={value === true}
-            onCheckedChange={(checked) => {
-              onSubmit(!!checked);
-            }}
+            onCheckedChange={(checked) => onSubmit(!!checked)}
             className="mt-0.5"
           />
-          <span className="text-sm text-foreground leading-relaxed">
-            {field.label}
-          </span>
+          <span className="text-sm text-foreground leading-relaxed">{label}</span>
         </label>
         {value === true && (
           <button
             onClick={handleContinue}
             className="mt-6 w-full rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors"
           >
-            Continue
+            {lang === "fr" ? "Continuer" : "Continue"}
           </button>
         )}
         {error && <p className="text-sm text-destructive mt-2">{error}</p>}
@@ -103,15 +107,14 @@ export function FieldRenderer({
     );
   }
 
-  // Textarea
   if (field.type === "textarea") {
     return (
       <div className="w-full max-w-md">
         <Textarea
           value={localValue}
           onChange={(e) => setLocalValue(e.target.value)}
-          placeholder={field.placeholder}
-          rows={4}
+          placeholder={placeholder}
+          rows={6}
           className="text-base"
         />
         {error && <p className="text-sm text-destructive mt-2">{error}</p>}
@@ -120,35 +123,28 @@ export function FieldRenderer({
           disabled={!localValue.trim()}
           className="mt-6 w-full rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
         >
-          Continue
+          {lang === "fr" ? "Continuer" : "Continue"}
         </button>
       </div>
     );
   }
 
-  // Date
   if (field.type === "date") {
     return (
       <div className="w-full max-w-md">
-        <Input
-          type="date"
-          value={localValue}
-          onChange={(e) => setLocalValue(e.target.value)}
-          className="text-base"
-        />
+        <Input type="date" max="9999-12-31" value={localValue} onChange={(e) => setLocalValue(clampDateYear(e.target.value))} className="text-base" />
         {error && <p className="text-sm text-destructive mt-2">{error}</p>}
         <button
           onClick={handleContinue}
           disabled={!localValue}
           className="mt-6 w-full rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
         >
-          Continue
+          {lang === "fr" ? "Continuer" : "Continue"}
         </button>
       </div>
     );
   }
 
-  // Number
   if (field.type === "number") {
     return (
       <div className="w-full max-w-md">
@@ -157,7 +153,7 @@ export function FieldRenderer({
           value={localValue}
           onChange={(e) => setLocalValue(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder={field.placeholder}
+          placeholder={placeholder}
           className="text-base"
         />
         {error && <p className="text-sm text-destructive mt-2">{error}</p>}
@@ -166,38 +162,36 @@ export function FieldRenderer({
           disabled={!localValue}
           className="mt-6 w-full rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
         >
-          Continue
+          {lang === "fr" ? "Continuer" : "Continue"}
         </button>
       </div>
     );
   }
 
-  // Info block
   if (field.type === "info") {
     return (
       <div className="w-full max-w-md">
-        <p className="text-muted-foreground leading-relaxed">
-          {field.description}
-        </p>
+        <p className="text-muted-foreground leading-relaxed">{description}</p>
         <button
           onClick={() => onSubmit(true)}
           className="mt-6 w-full rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors"
         >
-          Continue
+          {lang === "fr" ? "Continuer" : "Continue"}
         </button>
       </div>
     );
   }
 
-  // Default: text input
   return (
     <div className="w-full max-w-md">
       <Input
-        type="text"
+        type={field.type === "email" ? "email" : "text"}
+        inputMode={field.type === "email" ? "email" : undefined}
+        autoComplete={field.type === "email" ? "email" : undefined}
         value={localValue}
         onChange={(e) => setLocalValue(e.target.value)}
         onKeyDown={handleKeyDown}
-        placeholder={field.placeholder}
+        placeholder={placeholder}
         className="text-base"
         autoFocus
       />
@@ -207,7 +201,7 @@ export function FieldRenderer({
         disabled={!localValue.trim()}
         className="mt-6 w-full rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
       >
-        Continue
+        {lang === "fr" ? "Continuer" : "Continue"}
       </button>
     </div>
   );

@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useLang } from "@/lib/i18n-utils";
+import { useLang } from "@/lib/i18n-hooks";
 import {
   provinceList,
   isActiveProvince,

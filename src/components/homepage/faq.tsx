@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/accordion";
 import { faq } from "@/content/faq";
 import { pickLocale } from "@/content";
-import { useLang } from "@/lib/i18n-utils";
+import { useLang } from "@/lib/i18n-hooks";
 
 export function FAQ() {
   const lang = useLang();

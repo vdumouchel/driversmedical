@@ -45,7 +45,7 @@ export async function Hero({
 
             <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center">
               <Link
-                href={lp("/intake")}
+                href={province ? lp(`/intake/${province}`) : lp("/intake")}
                 className={buttonVariants({ size: "lg", className: "text-base" })}
               >
                 {c.ctaPrimary}

@@ -9,7 +9,7 @@ import { QuestionFlow } from "@/components/intake/question-flow";
 export default function ProvinceIntakePage() {
   const params = useParams<{ province: string }>();
   const router = useRouter();
-  const { province, setProvince, setFields, fields } = useIntakeStore();
+  const { setProvince, setSchema, fields } = useIntakeStore();
 
   const slug = params.province;
 
@@ -25,12 +25,11 @@ export default function ProvinceIntakePage() {
       return;
     }
 
-    // Only reset fields if switching provinces
-    if (province !== slug || fields.length === 0) {
-      setProvince(slug);
-      setFields(schema.fields);
-    }
-  }, [slug, province, fields.length, setProvince, setFields, router]);
+    // Source of truth is the route slug: always hydrate schema from URL.
+    // This avoids stale fields when province was pre-selected in the store.
+    setProvince(slug);
+    setSchema(schema.fields, schema.groups);
+  }, [slug, setProvince, setSchema, router]);
 
   if (!isValidProvince(slug)) return null;
 
