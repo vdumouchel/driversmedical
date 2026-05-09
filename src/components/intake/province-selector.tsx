@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { provinceList } from "@/config/provinces";
 import { useIntakeStore } from "@/stores/intake-store";
 import { motion } from "framer-motion";
-import { useLocalePath, useLang } from "@/lib/i18n-utils";
+import { useLocalePath, useLang } from "@/lib/i18n-hooks";
 import { intake } from "@/content/intake";
 import { pickLocale } from "@/content";
 

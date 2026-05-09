@@ -1,0 +1,41 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1777074050814,
+      "tag": "0000_certain_hellion",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1777147894451,
+      "tag": "0001_glorious_jack_flag",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1777167236950,
+      "tag": "0002_colorful_cerebro",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1777167599313,
+      "tag": "0003_wild_chat",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1777170364310,
+      "tag": "0004_shocking_wind_dancer",
+      "breakpoints": true
+    }
+  ]
+}

@@ -3,12 +3,13 @@
 import { useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { useIntakeStore } from "@/stores/intake-store";
+import { useIntakeStore, type AnswerValue } from "@/stores/intake-store";
 import { validateField } from "@/schemas/validation";
+import { resolveLS } from "@/lib/i18n-utils";
+import { useLang, useLocalePath } from "@/lib/i18n-hooks";
 import { FieldRenderer } from "./field-renderer";
+import { GroupStep } from "./group-step";
 import { ProgressBar } from "./progress-bar";
-import type { FormField } from "@/schemas/types";
-import { useLocalePath } from "@/lib/i18n-utils";
 
 interface QuestionFlowProps {
   provinceSlug: string;
@@ -16,48 +17,62 @@ interface QuestionFlowProps {
 
 export function QuestionFlow({ provinceSlug }: QuestionFlowProps) {
   const router = useRouter();
+  const lang = useLang();
   const lp = useLocalePath();
   const {
     fields,
     answers,
     currentIndex,
     setAnswer,
+    setAnswers,
     next,
     prev,
-    getVisibleFields,
-    getVisibleIndex,
-    getVisibleCount,
+    getVisibleSteps,
+    getVisibleStepIndex,
+    getVisibleStepCount,
+    getCurrentStep,
   } = useIntakeStore();
 
-  const visibleFields = useMemo(() => getVisibleFields(), [getVisibleFields, answers, fields]);
-  const visibleIndex = useMemo(() => getVisibleIndex(), [getVisibleIndex, currentIndex, answers, fields]);
-  const visibleCount = useMemo(() => getVisibleCount(), [getVisibleCount, answers, fields]);
+  const steps = useMemo(
+    () => getVisibleSteps(),
+    [getVisibleSteps, answers, fields]
+  );
+  const stepIndex = useMemo(
+    () => getVisibleStepIndex(),
+    [getVisibleStepIndex, currentIndex, answers, fields]
+  );
+  const stepCount = useMemo(
+    () => getVisibleStepCount(),
+    [getVisibleStepCount, answers, fields]
+  );
+  const currentStep = useMemo(
+    () => getCurrentStep(),
+    [getCurrentStep, currentIndex, answers, fields]
+  );
 
-  const currentField: FormField | undefined = visibleFields[visibleIndex];
-  const isLastQuestion = visibleIndex >= visibleCount - 1;
-  const isFinished = visibleIndex >= visibleCount;
+  const isLastStep = stepIndex >= stepCount - 1;
+  const isFinished = stepIndex >= stepCount;
 
-  const handleSubmit = useCallback(
+  const advance = useCallback(() => {
+    if (isLastStep) {
+      router.push(lp(`/intake/${provinceSlug}/summary`));
+    } else {
+      next();
+    }
+  }, [isLastStep, next, provinceSlug, router, lp]);
+
+  const handleFieldSubmit = useCallback(
     (value: string | number | boolean) => {
-      if (!currentField) return;
+      if (!currentStep || currentStep.kind !== "field") return;
+      const field = currentStep.field;
 
-      // Validate
-      const result = validateField(currentField, value);
-      if (!result.valid) return; // field renderer shows inline error via its own state
+      const result = validateField(field, value, lang);
+      if (!result.valid) return;
 
-      setAnswer(currentField.id, value);
+      setAnswer(field.id, value);
 
-      // Small delay for option-select / yes-no to show selection state
       const isAutoAdvance =
-        currentField.type === "yes-no" || currentField.type === "option-select";
-
-      const advance = () => {
-        if (isLastQuestion) {
-          router.push(lp(`/intake/${provinceSlug}/summary`));
-        } else {
-          next();
-        }
-      };
+        field.type === "yes-no" || field.type === "option-select";
 
       if (isAutoAdvance) {
         setTimeout(advance, 250);
@@ -65,75 +80,94 @@ export function QuestionFlow({ provinceSlug }: QuestionFlowProps) {
         advance();
       }
     },
-    [currentField, isLastQuestion, next, provinceSlug, router, setAnswer]
+    [currentStep, setAnswer, advance]
   );
 
-  if (isFinished || !currentField) {
+  const handleGroupSubmit = useCallback(
+    (values: Record<string, AnswerValue>) => {
+      setAnswers(values);
+      advance();
+    },
+    [setAnswers, advance]
+  );
+
+  if (isFinished || !currentStep) {
     router.push(lp(`/intake/${provinceSlug}/summary`));
     return null;
   }
 
-  // For checkbox type, don't show the label above (it's in the checkbox itself)
-  const showLabel = currentField.type !== "checkbox";
+  const stepKey =
+    currentStep.kind === "field" ? currentStep.field.id : `group:${currentStep.id}`;
+
+  const showLabel =
+    currentStep.kind === "field" && currentStep.field.type !== "checkbox";
 
   return (
     <div className="flex-1 flex flex-col">
-      <ProgressBar current={visibleIndex} total={visibleCount} />
+      <ProgressBar current={stepIndex} total={stepCount} />
 
       <div className="flex-1 flex items-center justify-center px-4 py-8">
-        <div className="w-full max-w-lg">
-          {/* Back button */}
-          {visibleIndex > 0 && (
-            <button
-              onClick={prev}
-              className="mb-8 flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
+        <div className="w-full max-w-2xl">
+          <button
+            onClick={stepIndex > 0 ? prev : () => router.push(lp("/intake"))}
+            className="mb-8 flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <svg
+              className="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
             >
-              <svg
-                className="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-              Back
-            </button>
-          )}
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+            {lang === "fr" ? "Retour" : "Back"}
+          </button>
 
           <AnimatePresence mode="wait">
             <motion.div
-              key={currentField.id}
+              key={stepKey}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.25 }}
               className="flex flex-col items-center text-center"
             >
-              {showLabel && (
-                <>
-                  <h2 className="text-xl sm:text-2xl font-semibold text-foreground mb-2 leading-snug">
-                    {currentField.label}
-                  </h2>
-                  {currentField.description && (
-                    <p className="text-muted-foreground text-sm mb-8 max-w-md">
-                      {currentField.description}
-                    </p>
+              {currentStep.kind === "field" ? (
+                <div className="w-full max-w-lg mx-auto">
+                  {showLabel && (
+                    <>
+                      <h2 className="text-xl sm:text-2xl font-semibold text-foreground mb-2 leading-snug">
+                        {resolveLS(currentStep.field.label, lang)}
+                      </h2>
+                      {currentStep.field.description && (
+                        <p className="text-muted-foreground text-sm mb-8 max-w-md mx-auto">
+                          {resolveLS(currentStep.field.description, lang)}
+                        </p>
+                      )}
+                      {!currentStep.field.description && <div className="mb-8" />}
+                    </>
                   )}
-                  {!currentField.description && <div className="mb-8" />}
-                </>
+                  {!showLabel && <div className="mb-4" />}
+                  <div className="flex justify-center">
+                    <FieldRenderer
+                      field={currentStep.field}
+                      value={answers[currentStep.field.id] as string | number | boolean | undefined}
+                      onSubmit={handleFieldSubmit}
+                    />
+                  </div>
+                </div>
+              ) : (
+                <GroupStep
+                  step={currentStep}
+                  answers={answers}
+                  onSubmit={handleGroupSubmit}
+                />
               )}
-              {!showLabel && <div className="mb-4" />}
-
-              <FieldRenderer
-                field={currentField}
-                value={answers[currentField.id]}
-                onSubmit={handleSubmit}
-              />
             </motion.div>
           </AnimatePresence>
         </div>

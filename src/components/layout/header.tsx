@@ -7,7 +7,7 @@ import { useState } from "react";
 import { brand } from "@/config/brand";
 import { site } from "@/content/site";
 import { pickLocale } from "@/content";
-import { useLang, useLocalePath } from "@/lib/i18n-utils";
+import { useLang, useLocalePath } from "@/lib/i18n-hooks";
 import { usePathname } from "next/navigation";
 
 export function Header() {
