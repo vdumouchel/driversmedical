@@ -151,12 +151,15 @@ export default async function ReceiptPage({ params }: PageProps) {
         amountPaid: "Montant payé",
         paidVia: (b: string, last4: string) => `Payé via ${b} •••• ${last4}`,
         paidViaUnknown: "Payé",
-        thankYou: "Merci pour votre confiance.",
-        contact: "Pour toute question, contactez",
         printBtn: "Imprimer / Enregistrer en PDF",
         whatHappensNext: "Ce qui se passe ensuite",
         nextStepsInPerson: (name: string, addr: string, ph: string) =>
           `Un administrateur de ${name} (${addr}) vous appellera au ${ph} dans les 72 heures pour planifier votre examen visuel en personne et finaliser votre formulaire.`,
+        nextStepsDigital: () =>
+          `Votre paiement est confirmé. Un clinicien autorisé analysera votre questionnaire et vous enverra par courriel votre formulaire DL-1 signé en PDF sécurisé, habituellement dans les 24 heures. Vérifiez votre boîte de réception et le dossier pourriel.`,
+        supportContactIntro: "Besoin d'aide?",
+        supportContactLines: (email: string, hours: string) =>
+          `Écrivez-nous à ${email}. Disponibilité du soutien : ${hours}. Indiquez votre numéro de reçu ci-dessus pour que nous puissions vous aider plus vite.`,
         formLine: (p: string, code: string | null, cls: string | null) =>
           `Formulaire médical de conducteur — ${p}${code ? ` (${code})` : ""}${cls ? ` — Classe ${cls}` : ""}`,
       }
@@ -173,12 +176,15 @@ export default async function ReceiptPage({ params }: PageProps) {
         amountPaid: "Amount paid",
         paidVia: (b: string, last4: string) => `Paid via ${b} •••• ${last4}`,
         paidViaUnknown: "Paid",
-        thankYou: "Thank you for your business.",
-        contact: "Questions? Contact",
         printBtn: "Print / Save as PDF",
         whatHappensNext: "What happens next",
         nextStepsInPerson: (name: string, addr: string, ph: string) =>
           `An administrator from ${name} (${addr}) will call you at ${ph} within 72 hours to schedule your in-person eye examination and finalize your form.`,
+        nextStepsDigital: () =>
+          `Your payment is confirmed. A licensed clinician will review your questionnaire and email your signed DL-1 form as a secure PDF, usually within 24 hours. Check your inbox and spam folder.`,
+        supportContactIntro: "Need help?",
+        supportContactLines: (email: string, hours: string) =>
+          `Email us at ${email}. Support hours: ${hours}. Include your receipt number above so we can assist you faster.`,
         formLine: (p: string, code: string | null, cls: string | null) =>
           `Driver's medical form — ${p}${code ? ` (${code})` : ""}${cls ? ` — Class ${cls}` : ""}`,
       };
@@ -198,10 +204,26 @@ export default async function ReceiptPage({ params }: PageProps) {
       province.inPersonAppointments.length > 0
   );
 
+  const shouldShowDigitalNextSteps =
+    txn.provinceRequired === "new-brunswick" && !shouldShowInPersonNextSteps;
+
   const paidLine =
     txn.paymentMethodBrand && txn.paymentMethodLast4
       ? t.paidVia(brandColor(txn.paymentMethodBrand), txn.paymentMethodLast4)
       : t.paidViaUnknown;
+
+  const supportHours = brand.contact.hoursLabel[isFr ? "fr" : "en"];
+
+  const whatsNextSupportBlock = (
+    <div className="mt-4 border-t border-border pt-4">
+      <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+        {t.supportContactIntro}
+      </p>
+      <p className="mt-2 text-sm text-foreground leading-relaxed">
+        {t.supportContactLines(brand.contact.email, supportHours)}
+      </p>
+    </div>
+  );
 
   return (
     <>
@@ -378,13 +400,26 @@ export default async function ReceiptPage({ params }: PageProps) {
           </section>
 
           {shouldShowInPersonNextSteps && selectedClinicName && selectedClinicAddress && patientPhone && (
-            <section className="mb-10 rounded-lg border border-border bg-card p-5">
+            <section className="mb-10 rounded-lg border border-border bg-card p-5 print:break-inside-avoid">
               <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 {t.whatHappensNext}
               </p>
               <p className="mt-2 text-sm text-foreground leading-relaxed">
                 {t.nextStepsInPerson(selectedClinicName, selectedClinicAddress, patientPhone)}
               </p>
+              {whatsNextSupportBlock}
+            </section>
+          )}
+
+          {shouldShowDigitalNextSteps && (
+            <section className="mb-10 rounded-lg border border-border bg-card p-5 print:break-inside-avoid">
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                {t.whatHappensNext}
+              </p>
+              <p className="mt-2 text-sm text-foreground leading-relaxed">
+                {t.nextStepsDigital()}
+              </p>
+              {whatsNextSupportBlock}
             </section>
           )}
 
@@ -393,20 +428,6 @@ export default async function ReceiptPage({ params }: PageProps) {
             {paidLine}
             {txn.paidAt ? ` — ${fmtDate(txn.paidAt, lang)}` : ""}
           </section>
-
-          {/* Footer */}
-          <footer className="border-t border-border pt-6 text-center text-xs text-muted-foreground">
-            <p>{t.thankYou}</p>
-            <p className="mt-1">
-              {t.contact}{" "}
-              <a
-                href={`mailto:${brand.contact.email}`}
-                className="text-foreground hover:underline"
-              >
-                {brand.contact.email}
-              </a>
-            </p>
-          </footer>
         </article>
       </div>
     </>

@@ -64,10 +64,10 @@ export default function SummaryPage() {
     router.push(lp(`/intake/${params.province}/confirmation${qs}`));
   }
 
-  // Poll the status endpoint until the Stripe webhook has populated
-  // `receipt_id` + `receipt_url`. While polling, we keep the page mounted and
-  // overlay a "finalizing" spinner so the user never sees a half-rendered
-  // confirmation page.
+  // Poll until the transaction is ready for confirmation (succeeded + payment
+  // method details for the receipt). `receipt_url` may still be filled by the
+  // webhook when Stripe emails a hosted receipt. While polling, keep the page
+  // mounted with a "finalizing" overlay.
   function pollUntilReady(paymentIntentId: string) {
     const tick = async () => {
       try {

@@ -536,7 +536,7 @@ export const quebecSchema: ProvinceSchema = {
       id: "sleep_apnea_treated",
       type: "yes-no",
       section: { en: "Section 6 — Respiratory Disorders", fr: "Section 6 — Troubles respiratoires" },
-      label: { en: "Is your sleep apnea currently being treated effectively (e.g. with a continuous positive airway pressure (CPAP) device)?", fr: "Votre apnée du sommeil est-elle actuellement traitée efficacement (ex. avec un appareil à pression positive continue (PPC))?" },
+      label: { en: "Is your sleep apnea currently being treated effectively (e.g. with a continuous positive airway pressure (CPAP or BiPAP) device)?", fr: "Votre apnée du sommeil est-elle actuellement traitée efficacement (ex. avec un appareil à pression positive continue (CPAP ou BiPAP))?" },
       conditions: [{ field: "respiratory_conditions", operator: "includes", value: "sleep_apnea" }],
     },
 
@@ -621,18 +621,6 @@ export const quebecSchema: ProvinceSchema = {
         { label: { en: "Alcohol", fr: "Alcool" }, value: "alcohol" },
         { label: { en: "Drugs (illicit or prescription misuse)", fr: "Drogues (utilisation illicite ou mauvaise utilisation de médicaments prescrits)" }, value: "drugs" },
         { label: { en: "Other substance", fr: "Autre substance" }, value: "other_substance" },
-      ],
-    },
-    {
-      id: "substance_severity",
-      type: "option-select",
-      section: { en: "Section 9 — Substance Use Disorders", fr: "Section 9 — Troubles liés à l'utilisation de substances" },
-      groupId: "substance_detail",
-      label: { en: "Severity of the substance use disorder:", fr: "Sévérité du trouble lié à l'utilisation de substances :" },
-      options: [
-        { label: { en: "Mild", fr: "Léger" }, value: "mild", description: { en: "2–3 diagnostic criteria", fr: "2–3 critères diagnostiques" } },
-        { label: { en: "Moderate", fr: "Modéré" }, value: "moderate", description: { en: "4–5 diagnostic criteria", fr: "4–5 critères diagnostiques" } },
-        { label: { en: "Severe", fr: "Sévère" }, value: "severe", description: { en: "6 or more diagnostic criteria", fr: "6 critères diagnostiques ou plus" } },
       ],
     },
     {

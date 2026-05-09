@@ -215,15 +215,18 @@ export async function POST(req: Request) {
 
     // 4. Persist the transaction in "pending". Fees + status get updated by
     //    the Stripe webhook once the charge settles.
+    const receiptRef = generateReceiptNumber();
+
     await db.insert(transactions).values({
       intakeId: intake.id,
       userId,
       provinceRequired: province,
       transactionId: paymentIntent.id,
-      // Our customer-facing receipt number, stable from the moment payment
-      // kicks off. Customer service references this when discussing a
-      // transaction with the user.
-      receiptNumber: generateReceiptNumber(),
+      // Customer-facing receipt id (DM-YYYYMMDD-XXXXXX), stable from PI
+      // creation — printed on our HTML receipt and stored on receipt_id +
+      // receipt_number for lookups.
+      receiptNumber: receiptRef,
+      receiptId: receiptRef,
       status: "pending",
       subtotalAmount: Math.round(subtotal ?? 0),
       taxesTotalAmount: Math.round(taxes ?? 0),

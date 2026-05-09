@@ -156,7 +156,6 @@ async function applyChargeFees(
       .update(transactions)
       .set({
         stripeChargeId: charge.id,
-        receiptId: charge.receipt_number ?? null,
         receiptUrl: charge.receipt_url ?? null,
         paymentMethodBrand: charge.payment_method_details?.card?.brand ?? null,
         paymentMethodLast4: charge.payment_method_details?.card?.last4 ?? null,
@@ -176,7 +175,6 @@ async function applyChargeFees(
       stripeBalanceTransactionId: bt.id,
       stripeFeesAmount: bt.fee,
       availableAmountAfterStripeFees: bt.net,
-      receiptId: charge.receipt_number ?? null,
       receiptUrl: charge.receipt_url ?? null,
       paymentMethodBrand: charge.payment_method_details?.card?.brand ?? null,
       paymentMethodLast4: charge.payment_method_details?.card?.last4 ?? null,

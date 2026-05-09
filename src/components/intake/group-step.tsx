@@ -141,7 +141,8 @@ function applyMask(input: string, mask: string): string {
     if (m === "A") {
       if (/[A-Z]/.test(chars[ci])) result += chars[ci++];
       else break;
-    } else if (m === "X") {
+    } else if (m === "X" || /^[0-9]$/.test(m)) {
+      // X or a mask digit (e.g. "A1A 1A1") — digit slot; don't paste the template digit
       if (/[0-9]/.test(chars[ci])) result += chars[ci++];
       else break;
     } else {
@@ -156,7 +157,7 @@ function maskToRegex(mask: string): RegExp {
     .split("")
     .map((ch) => {
       if (ch === "A") return "[A-Z]";
-      if (ch === "X") return "[0-9]";
+      if (ch === "X" || /^[0-9]$/.test(ch)) return "[0-9]";
       return ch.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     })
     .join("");

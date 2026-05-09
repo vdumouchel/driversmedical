@@ -105,9 +105,9 @@ export const transactions = pgTable(
     availableAmountAfterStripeFees: integer("available_amount_after_stripe_fees"),
     stripeChargeId: text("stripe_charge_id"),
     stripeBalanceTransactionId: text("stripe_balance_transaction_id"),
-    // Stripe-generated receipt (populated when receipt_email is set on PI).
-    // receipt_id is the human-friendly confirmation number (e.g. "1234-5678");
-    // receipt_url is the hosted printable receipt page.
+    // Customer-facing receipt reference (DM-YYYYMMDD-XXXXXX), set at PI
+    // creation — same value as receipt_number. Hosted Stripe receipt URL when
+    // receipt_email is set is stored in receipt_url.
     receiptId: text("receipt_id"),
     receiptUrl: text("receipt_url"),
     // Our own human-friendly receipt number (e.g. "DM-20260425-A4B2C3"),
