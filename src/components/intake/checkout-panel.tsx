@@ -183,6 +183,7 @@ export function CheckoutPanel({
         subtotal: subtotalCents,
         taxes: taxesCents,
         formCode,
+        lang,
         licenseClass:
           typeof answers["licence_class"] === "string"
             ? (answers["licence_class"] as string)

@@ -130,6 +130,8 @@ export default async function ConfirmationPage({
         thankYou:
           "Merci d'avoir complété votre admission. Un médecin ou une infirmière autorisé(e) examinera vos informations et complétera votre formulaire médical de conducteur.",
         confirmationNumber: "Numéro de confirmation",
+        receiptEmailNotice: (em: string) =>
+          `Une copie de ce reçu a été envoyée à votre adresse courriel ${em}. Vérifiez votre dossier de courrier indésirable au besoin.`,
         nextSteps: "Prochaines étapes",
         nextStepsNb: (em: string) =>
           `Un professionnel de la santé autorisé (médecin ou infirmière) examinera votre demande et enverra votre formulaire complété par courriel à ${em} dans les 24 heures.`,
@@ -152,6 +154,8 @@ export default async function ConfirmationPage({
         thankYou:
           "Thank you for completing your intake. A licensed physician or nurse will review your information and complete your driver's medical form.",
         confirmationNumber: "Confirmation number",
+        receiptEmailNotice: (em: string) =>
+          `A copy of this receipt was sent to your email ${em}. Make sure to check your junk folder if needed.`,
         nextSteps: "What happens next",
         nextStepsNb: (em: string) =>
           `A licensed healthcare provider (physician or nurse) will review your request and email your completed form to ${em} within 24 hours.`,
@@ -203,6 +207,11 @@ export default async function ConfirmationPage({
             <p className="text-lg font-mono font-semibold text-foreground">
               {receiptId}
             </p>
+            {email && (
+              <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+                {t.receiptEmailNotice(email)}
+              </p>
+            )}
           </div>
         )}
 

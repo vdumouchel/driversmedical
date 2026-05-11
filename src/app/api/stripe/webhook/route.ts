@@ -1,8 +1,12 @@
 import Stripe from "stripe";
 import { NextResponse } from "next/server";
 import { db } from "@/db";
-import { transactions } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { transactions, intakes, users } from "@/db/schema";
+import { eq, and, isNull } from "drizzle-orm";
+import { buildReceiptModel } from "@/lib/receipt-model";
+import { renderReceiptEmailHtml } from "@/lib/receipt-email";
+import { getResend, getResendFrom } from "@/lib/resend";
+import { brand } from "@/config/brand";
 
 export const runtime = "nodejs";
 
@@ -187,6 +191,11 @@ async function applyChargeFees(
   console.log(
     `[stripe-webhook] settled PI ${piId}: fee=${bt.fee} net=${bt.net} bt=${bt.id} → ${result.length} row(s)`
   );
+
+  // Fire-and-forget: send a branded receipt email now that card details are known.
+  void sendReceiptEmailIfNeeded(piId).catch((err) =>
+    console.error(`[stripe-webhook] receipt email failed for PI ${piId}:`, err)
+  );
 }
 
 /**
@@ -216,4 +225,73 @@ async function settleFees(stripe: Stripe, piId: string) {
   }
 
   await applyChargeFees(stripe, piId, charge);
+}
+
+/**
+ * Send a branded receipt email via Resend. Idempotent: skips if
+ * `receipt_email_sent_at` is already set or the user has no email.
+ * Reads the locale from the PI metadata so the email matches the
+ * language the customer used at checkout.
+ */
+async function sendReceiptEmailIfNeeded(piId: string) {
+  const resend = getResend();
+  if (!resend) return;
+
+  // Atomically claim the "not yet sent" slot: only the first caller for this
+  // PI will get a row back; subsequent retries see receiptEmailSentAt != null.
+  const rows = await db
+    .select({
+      txn: transactions,
+      intake: intakes,
+      user: users,
+    })
+    .from(transactions)
+    .leftJoin(intakes, eq(intakes.id, transactions.intakeId))
+    .leftJoin(users, eq(users.id, transactions.userId))
+    .where(
+      and(
+        eq(transactions.transactionId, piId),
+        isNull(transactions.receiptEmailSentAt),
+      ),
+    )
+    .limit(1);
+
+  const row = rows[0];
+  if (!row?.user) return;
+
+  const email = row.user.email;
+  if (!email) {
+    console.log(`[receipt-email] PI ${piId}: user has no email — skipping`);
+    return;
+  }
+
+  // Resolve locale from PI metadata (set by create-payment-intent).
+  const txnMeta = (row.txn.metadata ?? {}) as Record<string, unknown>;
+  const lang = txnMeta.locale === "fr" ? "fr" : "en";
+
+  const model = buildReceiptModel(row.txn, row.user, row.intake, lang);
+  const html = renderReceiptEmailHtml(model);
+
+  const subject = lang === "fr"
+    ? `${brand.siteName} — Reçu ${model.receiptNumber}`
+    : `${brand.siteName} — Receipt ${model.receiptNumber}`;
+
+  await resend.emails.send({
+    from: getResendFrom(),
+    to: email,
+    subject,
+    html,
+  });
+
+  await db
+    .update(transactions)
+    .set({ receiptEmailSentAt: new Date(), updatedAt: new Date() })
+    .where(
+      and(
+        eq(transactions.transactionId, piId),
+        isNull(transactions.receiptEmailSentAt),
+      ),
+    );
+
+  console.log(`[receipt-email] sent receipt to ${email} for PI ${piId}`);
 }
