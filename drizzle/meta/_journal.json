@@ -36,6 +36,20 @@
       "when": 1777170364310,
       "tag": "0004_shocking_wind_dancer",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1778446646389,
+      "tag": "0005_chunky_stick",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1778459740084,
+      "tag": "0006_handy_ulik",
+      "breakpoints": true
     }
   ]
 }

@@ -14,6 +14,7 @@ type Payload = {
   province: string;
   formCode?: string;
   licenseClass?: string;
+  lang?: "en" | "fr";
   answers: Record<string, unknown>;
 };
 
@@ -63,7 +64,7 @@ export async function POST(req: Request) {
 
   try {
     const body = (await req.json()) as Payload;
-    const { amount, subtotal, taxes, province, formCode, licenseClass, answers } = body;
+    const { amount, subtotal, taxes, province, formCode, licenseClass, lang, answers } = body;
 
     if (!amount || amount < 50) {
       return NextResponse.json({ error: "Invalid amount" }, { status: 400 });
@@ -84,7 +85,16 @@ export async function POST(req: Request) {
     //    Name alone is too loose. We don't error if nothing matches — just insert.
     // `address` is captured from intake answers but isn't a column on users —
     // strip it before writing to the DB.
-    const { address: _addressForStripe, ...userDbFields } = userFields;
+    const userDbFields = {
+      firstName: userFields.firstName,
+      lastName: userFields.lastName,
+      dateOfBirth: userFields.dateOfBirth,
+      city: userFields.city,
+      phoneNumber: userFields.phoneNumber,
+      postalCode: userFields.postalCode,
+      licenseNumber: userFields.licenseNumber,
+      email: userFields.email,
+    };
 
     let userId: string | null = null;
     let stripeCustomerId: string | null = null;
@@ -210,6 +220,7 @@ export async function POST(req: Request) {
         province,
         intake_id: intake.id,
         user_id: userId,
+        locale: lang ?? "en",
       },
     });
 
@@ -232,7 +243,7 @@ export async function POST(req: Request) {
       taxesTotalAmount: Math.round(taxes ?? 0),
       totalAmount: Math.round(amount),
       currency: "cad",
-      metadata: { formCode, licenseClass },
+      metadata: { formCode, licenseClass, locale: lang ?? "en" },
     });
 
     // 5. Backfill transactionId onto the intake row.

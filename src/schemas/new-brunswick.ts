@@ -7,7 +7,6 @@ export const newBrunswickSchema: ProvinceSchema = {
   version: "2.0.0",
   metadata: {
     estimatedMinutes: 5,
-    formCode: "CSS-FOL-78-9282E",
     regulatoryBody: "Department of Justice and Public Safety — Motor Vehicle Branch",
   },
   groups: [

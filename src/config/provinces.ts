@@ -51,7 +51,6 @@ export const provinces = {
     nameEn: "New Brunswick",
     nameFr: "Nouveau-Brunswick",
     available: true,
-    formCode: "DL-1",
     priceCad: 80,
     turnaround: {
       en: "Form delivered by email within 24 hours",
@@ -59,18 +58,18 @@ export const provinces = {
     },
     pricingFeatures: {
       en: [
-        "Complete your DL-1 driver medical questionnaire online",
+        "Complete your driver medical questionnaire online",
         "Review by a licensed physician or nurse in New Brunswick",
-        "Official signed DL-1 form delivered digitally",
+        "Official signed driver medical form delivered digitally",
         "Secure PDF emailed to you, ready to submit",
         "Same-day processing when you qualify",
         "PIPEDA-compliant, encrypted intake",
         "Support available 7 days a week",
       ],
       fr: [
-        "Complétez votre questionnaire médical de conducteur DL-1 en ligne",
+        "Complétez votre questionnaire médical de conducteur en ligne",
         "Révision par un médecin ou une infirmière autorisés au Nouveau-Brunswick",
-        "Formulaire DL-1 signé officiellement et livré en format numérique",
+        "Formulaire médical de conducteur signé officiellement et livré en format numérique",
         "PDF sécurisé envoyé par courriel, prêt à soumettre",
         "Traitement le jour même lorsque vous êtes admissible",
         "Dossier d'admission chiffré et conforme à la LPRPDE",

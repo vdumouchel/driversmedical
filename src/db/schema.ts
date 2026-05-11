@@ -119,11 +119,7 @@ export const transactions = pgTable(
     paymentMethodBrand: text("payment_method_brand"),
     paymentMethodLast4: text("payment_method_last4"),
     paidAt: timestamp("paid_at", { withTimezone: true }),
-    // Legacy Stripe Invoice columns — no longer written to. Kept so existing
-    // rows don't break; new flow renders our own HTML receipt instead.
-    stripeInvoiceId: text("stripe_invoice_id"),
-    invoiceUrl: text("invoice_url"),
-    invoicePdfUrl: text("invoice_pdf_url"),
+    receiptEmailSentAt: timestamp("receipt_email_sent_at", { withTimezone: true }),
     currency: text("currency").notNull().default("cad"),
     metadata: jsonb("metadata").$type<Record<string, unknown>>(),
     createdAt: timestamp("created_at", { withTimezone: true })

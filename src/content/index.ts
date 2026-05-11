@@ -3,9 +3,15 @@ import type { Locale } from "@/lib/i18n";
 /**
  * Utility for picking the localized variant from content shaped as `{ en, fr }`.
  * All content modules in this directory export that shape.
+ *
+ * `en` and `fr` may differ structurally at the type level (e.g. `as const` string
+ * literals); callers receive the union of both branch types.
  */
-export function pickLocale<T>(value: { en: T; fr: T }, lang: string): T {
-  return (value as Record<string, T>)[lang] ?? value.en;
+export function pickLocale<TEn, TFr>(
+  value: { en: TEn; fr: TFr },
+  lang: string,
+): TEn | TFr {
+  return lang === "fr" ? value.fr : value.en;
 }
 
 export type LocalizedContent<T> = Record<Locale, T>;
