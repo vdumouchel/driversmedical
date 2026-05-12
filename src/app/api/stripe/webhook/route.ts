@@ -7,6 +7,7 @@ import { buildReceiptModel } from "@/lib/receipt-model";
 import { renderReceiptEmailHtml } from "@/lib/receipt-email";
 import { getResend, getResendFrom } from "@/lib/resend";
 import { brand } from "@/config/brand";
+import { generateFormForPaymentIntent } from "@/lib/forms/generate-form";
 
 export const runtime = "nodejs";
 
@@ -58,6 +59,11 @@ export async function POST(req: Request) {
         // Best-effort try fee settlement now in case balance_transaction is
         // already populated; if not, charge.succeeded will fill it shortly.
         await settleFees(stripe, pi.id);
+
+        // Fire-and-forget: generate the filled PDF form via Anvil.
+        void generateFormForPaymentIntent(pi.id).catch((err) =>
+          console.error(`[stripe-webhook] form generation failed for PI ${pi.id}:`, err)
+        );
         break;
       }
 

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "node scripts/dev.mjs",
+    "pdf:inspect-form": "node scripts/inspect-pdf-form.mjs",
     "build": "next build",
     "start": "next start",
     "prod": "next build && next start",
@@ -32,6 +33,7 @@
     "lucide-react": "^1.8.0",
     "next": "16.2.3",
     "next-themes": "^0.4.6",
+    "pdf-lib": "^1.17.1",
     "postgres": "^3.4.9",
     "react": "19.2.4",
     "react-dom": "19.2.4",

@@ -8,8 +8,18 @@ import {
   pgEnum,
   date,
   index,
+  uniqueIndex,
+  customType,
 } from "drizzle-orm/pg-core";
 import { relations, sql } from "drizzle-orm";
+
+// ─── Custom column types ─────────────────────────────────────────────────────
+
+const bytea = customType<{ data: Buffer; driverData: Buffer }>({
+  dataType() {
+    return "bytea";
+  },
+});
 
 // ─── Enums ────────────────────────────────────────────────────────────────────
 
@@ -136,16 +146,55 @@ export const transactions = pgTable(
   ]
 );
 
+// ─── Forms ────────────────────────────────────────────────────────────────────
+// Stores filled PDF forms returned by external APIs (e.g. Anvil).
+// One row per intake + template combination.
+
+export const forms = pgTable(
+  "forms",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    intakeId: uuid("intake_id")
+      .notNull()
+      .references(() => intakes.id, { onDelete: "cascade" }),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "restrict" }),
+    transactionId: text("transaction_id").notNull(), // Stripe PI id (pi_...)
+    provinceRequired: text("province_required").notNull(),
+    anvilTemplateId: text("anvil_template_id").notNull(),
+    pdf: bytea("pdf").notNull(),
+    pdfContentType: text("pdf_content_type").notNull().default("application/pdf"),
+    pdfSizeBytes: integer("pdf_size_bytes").notNull(),
+    emailFormSentTo: text("email_form_sent_to"),
+    formEmailSentAt: timestamp("form_email_sent_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+  },
+  (t) => [
+    index("forms_intake_idx").on(t.intakeId),
+    index("forms_user_idx").on(t.userId),
+    index("forms_transaction_idx").on(t.transactionId),
+    uniqueIndex("forms_intake_template_uniq").on(t.intakeId, t.anvilTemplateId),
+  ]
+);
+
 // ─── Relations ────────────────────────────────────────────────────────────────
 
 export const usersRelations = relations(users, ({ many }) => ({
   intakes: many(intakes),
   transactions: many(transactions),
+  forms: many(forms),
 }));
 
 export const intakesRelations = relations(intakes, ({ one, many }) => ({
   user: one(users, { fields: [intakes.userId], references: [users.id] }),
   transactions: many(transactions),
+  forms: many(forms),
 }));
 
 export const transactionsRelations = relations(transactions, ({ one }) => ({
@@ -159,6 +208,17 @@ export const transactionsRelations = relations(transactions, ({ one }) => ({
   }),
 }));
 
+export const formsRelations = relations(forms, ({ one }) => ({
+  intake: one(intakes, {
+    fields: [forms.intakeId],
+    references: [intakes.id],
+  }),
+  user: one(users, {
+    fields: [forms.userId],
+    references: [users.id],
+  }),
+}));
+
 // Touch-updatedAt helper used by callers; defined as SQL expression for convenience.
 export const updatedAtNow = sql`now()`;
 
@@ -168,3 +228,5 @@ export type Intake = typeof intakes.$inferSelect;
 export type NewIntake = typeof intakes.$inferInsert;
 export type Transaction = typeof transactions.$inferSelect;
 export type NewTransaction = typeof transactions.$inferInsert;
+export type Form = typeof forms.$inferSelect;
+export type NewForm = typeof forms.$inferInsert;
